@@ -1,0 +1,3 @@
+
+<img style="float:left;" src="<?= $this->picture['img']['src'] ?>" width="60" height="60" alt="<?= $this->firstname; ?> <?= $this->lastname; ?>"/>
+<strong style="float:left; margin-left:20px;"><?= $this->firstname; ?> <br><?= $this->lastname; ?></strong>

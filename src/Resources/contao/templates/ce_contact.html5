@@ -1,0 +1,23 @@
+<?php $this->extend('block_searchable'); ?>
+
+<?php $this->block('content'); ?>
+
+  <?php if ($this->addImage): ?>
+    <div class="contact-image" style="background-image: url('<?= $this->picture['img']['src'] ?>');background-position: center;background-repeat: no-repeat;background-size: cover">
+
+    </div>
+  <?php endif; ?>
+
+  <div class="contact-info">
+    <p><?php if ($this->alt_title): ?><?= $this->alt_title ?><?php else: ?><?= $GLOBALS['TL_LANG']['steinmueller']['contact'] ?><?php endif; ?></p>
+    <h2><?= $this->firstname ?> <?= $this->lastname ?></h2>
+    <p>
+      <?php if ($this->position_en): ?><?= $this->position_en ?><?php if ($this->position_en_secondline): ?><br><?= $this->position_en_secondline ?><?php endif; ?><br><?php endif; ?>
+
+      <?php if ($this->phone): ?><?= $GLOBALS['TL_LANG']['steinmueller']['phone'] ?> <?= $this->phone ?><br><?php endif; ?>
+      <?php if ($this->mobile): ?><?= $GLOBALS['TL_LANG']['steinmueller']['mobile'] ?> <?= $this->mobile ?><br><?php endif; ?>
+      <?php if ($this->email): ?><a href="mailto:<?= $this->email ?>" title="<?= $GLOBALS['TL_LANG']['steinmueller']['email_to'] ?> <?= $this->firstname ?> <?= $this->lastname ?>"> <?= $GLOBALS['TL_LANG']['steinmueller']['write_email'] ?> </a><?php endif; ?>
+    </p>
+  </div>
+
+<?php $this->endblock(); ?>

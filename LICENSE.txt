@@ -1,0 +1,7 @@
+/**
+ * Package      ArticleBackgrounds Extension
+ * Copyright    Sascha Wustmann 2016
+ * Author       Sascha Wustmann <me@saschawustmann.com>
+ * Link         http://www.saschawustmann.com/
+ * License      GNU/LGPL
+ */
