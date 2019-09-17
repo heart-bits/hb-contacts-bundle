@@ -2,9 +2,9 @@
 
 
 /**
- * Table tl_companies
+ * Table tl_departments
  */
-$GLOBALS['TL_DCA']['tl_companies'] = array
+$GLOBALS['TL_DCA']['tl_departments'] = array
 (
 
     // Config
@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             'mode' => 2,
             'fields' => array('title'),
             'flag' => 1,
-            'panelLayout' => 'filter;sort,search,limit'
+            'panelLayout' => 'search,limit'
         ),
         'label' => array
         (
@@ -49,13 +49,13 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
         (
             'edit' => array
             (
-                'label' => &$GLOBALS['TL_LANG']['tl_companies']['edit'],
+                'label' => &$GLOBALS['TL_LANG']['tl_departments']['edit'],
                 'href' => 'act=edit',
                 'icon' => 'edit.gif'
             ),
             'delete' => array
             (
-                'label' => &$GLOBALS['TL_LANG']['tl_companies']['delete'],
+                'label' => &$GLOBALS['TL_LANG']['tl_departments']['delete'],
                 'href' => 'act=delete',
                 'icon' => 'delete.gif',
                 'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
@@ -64,11 +64,11 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             (
                 'icon'                => 'visible.svg',
                 'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback'     => array('tl_companies', 'toggleIcon')
+                'button_callback'     => array('tl_departments', 'toggleIcon')
             ),
             'show' => array
             (
-                'label' => &$GLOBALS['TL_LANG']['tl_companies']['show'],
+                'label' => &$GLOBALS['TL_LANG']['tl_departments']['show'],
                 'href' => 'act=show',
                 'icon' => 'show.gif',
                 'attributes' => 'style="margin-right:3px"'
@@ -80,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
     'palettes' => array
     (
         '__selector__' => array('title'),
-        'default' => '{company_legend},title;{logo_legend},singleSRC;{address_legend},geocoderAddress,singleCoords,geocoderCountry;{contact_legend},phone,fax,mobile,email;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
+        'default' => '{department_legend},title;{expert_legend:hide},invisible;',
     ),
 
     // Fields
@@ -110,146 +110,6 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             'sql' => "varchar(255) NOT NULL default ''"
         ),
 
-        'phone' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'sorting' => true,
-            'flag' => 1,
-            'search' => true,
-            'eval' => array(
-                'unique' => true,
-                'maxlength' => 255,
-                'tl_class' => 'w50 clr'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'mobile' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'maxlength' => 255,
-                'tl_class' => 'w50 clr'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'email' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'maxlength' => 255,
-                'tl_class' => 'w50'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'fax' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'maxlength' => 255,
-                'tl_class' => 'w50'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'singleSRC' => array
-        (
-            'exclude' => true,
-            'inputType' => 'fileTree',
-            'eval' => array('filesOnly' => true, 'fieldType' => 'radio', 'tl_class' => 'clr', 'extensions' => Contao\Config::get('validImageTypes')),
-            'sql' => "binary(16) NULL"
-        ),
-
-        'facebook' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'unique' => true,
-                'maxlength' => 255,
-                'tl_class' => 'w50 clr'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'twitter' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'unique' => true,
-                'maxlength' => 255,
-                'tl_class' => 'w50'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'xing' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'unique' => true,
-                'maxlength' => 255,
-                'tl_class' => 'w50 clr'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'linkedin' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'unique' => true,
-                'maxlength' => 255,
-                'tl_class' => 'w50 clr'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'geocoderAddress' => array
-        (
-            'inputType' => 'text',
-            'exclude' => true,
-            'eval' => array(
-                'maxlength' => 255,
-                'tl_class' => 'w50 clr'
-            ),
-            'sql' => "varchar(255) NOT NULL default ''",
-            'save_callback' => array (
-                array('tl_contacts', 'generateCoords')
-            )
-        ),
-
-        'geocoderCountry' => array
-        (
-            'exclude' => true,
-            'filter' => true,
-            'inputType' => 'select',
-            'options' => $this->getCountries(),
-            'eval' => array('includeBlankOption' => true, 'tl_class' => 'w50 clr'),
-            'sql' => "varchar(2) NOT NULL default 'de'"
-        ),
-
-        'singleCoords' => array
-        (
-            'exclude' => true,
-            'search' => true,
-            'inputType' => 'text',
-            'eval' => array('maxlength' => 64, 'tl_class' => 'w50'),
-            'sql' => "varchar(64) NOT NULL default ''",
-            'save_callback' => array (
-                array('tl_companies', 'generateCoords')
-            )
-        ),
-
         'invisible' => array
         (
             'exclude'                 => true,
@@ -261,26 +121,15 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 );
 
 /**
- * Class tl_companies
+ * Class tl_departments
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  2015 Sascha Wustmann
  * @author     Sascha Wustmann <http://saschawustmann.com>
  * @package
  */
-class tl_companies extends \Backend
+class tl_departments extends \Backend
 {
-
-    /**
-     * Get geo coodinates from address
-     * @param string
-     * @param object
-     * @return string
-     */
-    function generateCoords($varValue, DataContainer $dc)
-    {
-        return $varValue ? $varValue : \delahaye\GeoCode::getCoordinates($dc->activeRecord->geocoderAddress, $dc->activeRecord->geocoderCountry, 'de');
-    }
 
     /**
      * Return the "toggle visibility" button
@@ -333,9 +182,9 @@ class tl_companies extends \Backend
         }
 
         // Trigger the onload_callback
-        if (\is_array($GLOBALS['TL_DCA']['tl_companies']['config']['onload_callback']))
+        if (\is_array($GLOBALS['TL_DCA']['tl_departments']['config']['onload_callback']))
         {
-            foreach ($GLOBALS['TL_DCA']['tl_companies']['config']['onload_callback'] as $callback)
+            foreach ($GLOBALS['TL_DCA']['tl_departments']['config']['onload_callback'] as $callback)
             {
                 if (\is_array($callback))
                 {
@@ -352,7 +201,7 @@ class tl_companies extends \Backend
         // Set the current record
         if ($dc)
         {
-            $objRow = $this->Database->prepare("SELECT * FROM tl_companies WHERE id=?")
+            $objRow = $this->Database->prepare("SELECT * FROM tl_departments WHERE id=?")
                 ->limit(1)
                 ->execute($intId);
 
@@ -362,16 +211,16 @@ class tl_companies extends \Backend
             }
         }
 
-        $objVersions = new Contao\Versions('tl_companies', $intId);
+        $objVersions = new Contao\Versions('tl_departments', $intId);
         $objVersions->initialize();
 
         // Reverse the logic (elements have invisible=1)
         $blnVisible = !$blnVisible;
 
         // Trigger the save_callback
-        if (\is_array($GLOBALS['TL_DCA']['tl_companies']['fields']['invisible']['save_callback']))
+        if (\is_array($GLOBALS['TL_DCA']['tl_departments']['fields']['invisible']['save_callback']))
         {
-            foreach ($GLOBALS['TL_DCA']['tl_companies']['fields']['invisible']['save_callback'] as $callback)
+            foreach ($GLOBALS['TL_DCA']['tl_departments']['fields']['invisible']['save_callback'] as $callback)
             {
                 if (\is_array($callback))
                 {
@@ -388,7 +237,7 @@ class tl_companies extends \Backend
         $time = time();
 
         // Update the database
-        $this->Database->prepare("UPDATE tl_companies SET tstamp=$time, invisible='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
+        $this->Database->prepare("UPDATE tl_departments SET tstamp=$time, invisible='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
             ->execute($intId);
 
         if ($dc)
@@ -398,9 +247,9 @@ class tl_companies extends \Backend
         }
 
         // Trigger the onsubmit_callback
-        if (\is_array($GLOBALS['TL_DCA']['tl_companies']['config']['onsubmit_callback']))
+        if (\is_array($GLOBALS['TL_DCA']['tl_departments']['config']['onsubmit_callback']))
         {
-            foreach ($GLOBALS['TL_DCA']['tl_companies']['config']['onsubmit_callback'] as $callback)
+            foreach ($GLOBALS['TL_DCA']['tl_departments']['config']['onsubmit_callback'] as $callback)
             {
                 if (\is_array($callback))
                 {

@@ -1,146 +1,67 @@
 <?php
 
-/**
- * Contao Open Source CMS
- *
- * Copyright (c) 2005-2015 Leo Feyer
- *
- * @license LGPL-3.0+
- */
-
 namespace Heartbits\ContaoContacts;
 
 use Contao\Database;
 
-
-/**
- * Front end content element "contact".
- *
- * @author Leo Feyer <https://github.com/leofeyer>
- */
-class Contact extends \ContentElement
+class Company extends \ContentElement
 {
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'ce_contact';
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'ce_company';
 
 
-	/**
-	 * Generate the content element
-	 */
-	protected function compile()
-	{
-		if (TL_MODE == 'BE')
-		{
-			$contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE id=?")->execute($this->contact_select);
+    /**
+     * Generate the content element
+     */
+    protected function compile()
+    {
+        // Get selected Company/ies from template
+        if (!$this->useSingleCompany && $this->country_select) {
+            $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE id=? AND invisible=''")->limit(1)->execute($this->company_select)->fetchAllAssoc();
+        } elseif ($this->useSingleCompany && $this->company_select) {
+            $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE geocoderCountry=? AND invisible=''")->execute($this->country_select)->fetchAllAssoc();
+        }
 
-			$this->Template 												= new \BackendTemplate('be_hb_contact');
-			$this->Template->lastname								= $contactData->lastname;
-			$this->Template->firstname							= $contactData->firstname;
-
-			// Add an image
-            if ($contactData->addImage && $contactData->singleSRC != '')
-            {
-                $objModel = \FilesModel::findByUuid($contactData->singleSRC);
-
-                if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
-                {
-                    $this->singleSRC = $objModel->path;
-                    $this->addImageToTemplate($this->Template, $this->arrData, null, null, $objModel);
+        // Push selected Company/ies to template
+        if (TL_MODE == 'BE') {
+            $this->Template = new \BackendTemplate('be_wildcard');
+            $title = '';
+            if (!empty($companyData)) {
+                $companyCount = count($companyData);
+                $i = 1;
+                foreach ($companyData as $company) {
+                    if ($companyCount === $i) {
+                        $title .= $company['title'] . ' (' . $company['geocoderAddress'] . ')<br>';
+                    } else {
+                        $title .= $company['title'] . ' (' . $company['geocoderAddress'] . '),<br>';
+                    }
+                    $i++;
                 }
             }
-		}
-		else {
-			// Get database
-			$contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE id=?")->execute($this->contact_select);
-
-			// Add contact fields
-			// Contact image
-			$this->Template->addImage								= $contactData->addImage;
-			$this->Template->alt										= $contactData->alt;
-			$this->Template->title									= $contactData->title;
-			$this->size															= deserialize($this->size);
-			$this->Template->size										= $this->size[2];
-			$this->Template->imagemargin						= $contactData->imagemargin;
-			$this->Template->imageUrl								= $contactData->imageUrl;
-			$this->Template->caption								= $contactData->caption;
-			$this->Template->floating								= $contactData->floating;
-
-			// Contact data
-			$this->Template->lastname								= $contactData->lastname;
-			$this->Template->firstname							= $contactData->firstname;
-			$this->Template->department_en					= $contactData->department_en;
-			$this->Template->department_de					= $contactData->department_de;
-			$this->Template->position_en						= $contactData->position_en;
-			$this->Template->position_de						= $contactData->position_de;
-			$this->Template->position_en_secondline	= $contactData->position_en_secondline;
-			$this->Template->position_de_secondline	= $contactData->position_de_secondline;
-			$this->Template->birthday								= $contactData->birthday;
-			$this->Template->phone									= $contactData->phone;
-			$this->Template->fax										= $contactData->fax;
-			$this->Template->mobile									= $contactData->mobile;
-			$this->Template->email									= $contactData->email;
-			$this->Template->facebook								= $contactData->facebook;
-			$this->Template->googleplus							= $contactData->googleplus;
-			$this->Template->twitter								= $contactData->twitter;
-			$this->Template->xing										= $contactData->xing;
-			$this->Template->linkedin								= $contactData->linkedin;
-
-			// Contact address ccordinates
-			$contactData->geocoderAddress						= explode(',', $contactData->geocoderAddress);
-			$this->Template->street									= ltrim($contactData->geocoderAddress[0]);
-			$contactData->geocoderAddressLocation		= ltrim($contactData->geocoderAddress[1]);
-			$contactData->geocoderAddressLocation		= explode(' ', $contactData->geocoderAddressLocation);
-			$this->Template->zip										= $contactData->geocoderAddressLocation[0];
-			$this->Template->location								= $contactData->geocoderAddressLocation[1];
-
-			$contactData->singleCoords							= explode(',', $contactData->singleCoords);
-			$this->Template->coordsLat							= $contactData->singleCoords[0];
-			$this->Template->coordsLong							= $contactData->singleCoords[1];
-
-			// Get database
-			$companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE id=?")->execute($contactData->company);
-
-			// Add company fields
-			$this->Template->companyRaw							= $companyData;
-			$this->Template->company								= $companyData->company;
-			$this->Template->company_phone					= $companyData->company_phone;
-			$this->Template->company_fax						= $companyData->company_fax;
-			$this->Template->company_mobile					= $companyData->company_mobile;
-			$this->Template->company_email					= $companyData->company_email;
-			$this->Template->company_facebook				= $companyData->company_facebook;
-			$this->Template->company_googleplus			= $companyData->company_googleplus;
-			$this->Template->company_twitter				= $companyData->company_twitter;
-			$this->Template->company_xing						= $companyData->company_xing;
-			$this->Template->company_linkedin				= $companyData->company_linkedin;
-
-			// Company address ccordinates
-			$companyData->geocoderAddress						= explode(',', $companyData->geocoderAddress);
-			$this->Template->companyStreet					= ltrim($companyData->geocoderAddress[0]);
-			$companyData->geocoderAddressLocation		= ltrim($companyData->geocoderAddress[1]);
-			$companyData->geocoderAddressLocation		= explode(' ', $companyData->geocoderAddressLocation);
-			$this->Template->companyZip							= $companyData->geocoderAddressLocation[0];
-			$this->Template->companyLocation				= $companyData->geocoderAddressLocation[1];
-
-			$companyData->singleCoords							= explode(',', $companyData->singleCoords);
-			$this->Template->companyCoordsLat				= $companyData->singleCoords[0];
-			$this->Template->companyCoordsLong			= $companyData->singleCoords[1];
-
-
-      // Add an image
-      if ($contactData->addImage && $contactData->singleSRC != '')
-      {
-          $objModel = \FilesModel::findByUuid($contactData->singleSRC);
-
-          if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
-          {
-              $this->singleSRC = $objModel->path;
-              $this->addImageToTemplate($this->Template, $this->arrData, null, null, $objModel);
-          }
-      }
-		}
-	}
+            $this->Template->title = $title;
+        } else {
+            \System::loadLanguageFile('tl_companies');
+            $arrCompanies = [];
+            if (!empty($companyData)) {
+                $i = 0;
+                foreach ($companyData as $company) {
+                    foreach ($company as $key => $value) {
+                        if ($key === 'geocoderCountry') {
+                            \System::loadLanguageFile('countries');
+                            $arrCompanies[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];
+                        } else {
+                            $arrCompanies[$i][$key] = $value;
+                        }
+                    }
+                    $i++;
+                }
+                $this->Template->size = \Contao\StringUtil::deserialize($this->size)[2];
+                $this->Template->companies = $arrCompanies;
+            }
+        }
+    }
 }

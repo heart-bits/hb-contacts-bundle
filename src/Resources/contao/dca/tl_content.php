@@ -1,36 +1,87 @@
 <?php
 
 /**
- * Contao Open Source CMS
- *
- * @copyright  Sascha Wustmann 2014
- * @package    AnimateElements
- * @license    GNU/LGPL
- * @filesource
- */
-
-/**
  * Palettes
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['contact'] = '{type_legend},type,contact_select,alt_title,size;{animate_element},animate_switch,parallax_switch;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+array_push($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'], 'useSingleCompany', 'useSingleContact');
+$GLOBALS['TL_DCA']['tl_content']['palettes']['contact'] = '{type_legend},type,company_select,department_select,useSingleContact,size;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['company'] = '{type_legend},type,country_select,useSingleCompany,size;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 
-// Fields
-$GLOBALS['TL_DCA']['tl_content']['fields']['contact_select'] = array(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['contact_select'],
-	'exclude' => true,
-	'sorting'   => true,
-	'flag'      => 1,
-	'search'    => true,
-	'sql' => 'int(100) unsigned NULL',
-	'foreignKey' => 'tl_contacts.CONCAT(lastname," ", firstname)',
-	'inputType'	=> 'select',
-	'eval' => array('includeBlankOption' => true, 'tl_class'=>'w50')
+/**
+ * Subpalettes
+ */
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['useSingleContact'] = 'contact_select';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['useSingleCompany'] = 'company_select';
+
+/**
+ * Fields
+ */
+$GLOBALS['TL_DCA']['tl_content']['fields']['department_select'] = array
+(
+    'exclude' => true,
+    'foreignKey' => 'tl_departments.title',
+    'inputType' => 'select',
+    'eval' => array(
+        'includeBlankOption' => true,
+        'tl_class' => 'w50'
+    ),
+    'sql' => 'int(100) unsigned NULL',
 );
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['alt_title'] = array(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt_title'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(255) NOT NULL default ''"
+$GLOBALS['TL_DCA']['tl_content']['fields']['useSingleContact'] = array
+(
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'eval'                    => array(
+        'submitOnChange'=>true,
+        'tl_class' => 'clr'
+    ),
+    'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['contact_select'] = array
+(
+    'exclude' => true,
+    'sql' => 'int(100) unsigned NULL',
+    'foreignKey' => 'tl_contacts.CONCAT(lastname," ", firstname)',
+    'inputType' => 'select',
+    'eval' => array(
+        'mandatory' => true,
+        'tl_class' => 'w50 clr'
+    )
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['country_select'] = array
+(
+    'exclude' => true,
+    'sql' => "varchar(2) NOT NULL default 'de'",
+    'options' => $this->getCountries(),
+    'inputType' => 'select',
+    'eval' => array(
+        'includeBlankOption' => true,
+        'tl_class' => 'w50 clr'
+    )
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['useSingleCompany'] = array
+(
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'eval'                    => array(
+        'submitOnChange'=>true,
+        'tl_class' => 'clr'
+    ),
+    'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['company_select'] = array
+(
+    'exclude' => true,
+    'sql' => 'int(100) unsigned NULL',
+    'foreignKey' => 'tl_companies.CONCAT(title," (", geocoderAddress, ")")',
+    'inputType' => 'select',
+    'eval' => array(
+        'mandatory' => true,
+        'tl_class' => 'w50 clr'
+    )
 );

@@ -2,24 +2,33 @@
 
 <?php $this->block('content'); ?>
 
-  <?php if ($this->addImage): ?>
-    <figure class="image_container"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?> itemscope itemtype="http://schema.org/ImageObject">
+<?php if($this->companies): ?>
+    <?php foreach ($this->companies as $company): ?>
+        <div class="company">
+            <?php if ($company['singleSRC']): ?>
+                <figure class="image_container" itemscope itemtype="http://schema.org/ImageObject">
+                    {{picture::<?= $company['singleSRC'] ?><?php if ($this->size): ?>?size=<?= $this->size ?><?php endif; ?>}}
+                </figure>
+            <?php endif; ?>
 
-      <?php $this->insert('picture_default', $this->picture); ?>
-
-    </figure>
-  <?php endif; ?>
-
-  <div class="contact-info">
-    <p><?php if ($this->alt_title): ?><?= $this->alt_title ?><?php else: ?><?= $GLOBALS['TL_LANG']['steinmueller']['contact'] ?><?php endif; ?></p>
-    <h2><?= $this->firstname ?> <?= $this->lastname ?></h2>
-    <p>
-      <?php if ($this->position_en): ?><?= $this->position_en ?><?php if ($this->position_en_secondline): ?><br><?= $this->position_en_secondline ?><?php endif; ?><br><?php endif; ?>
-
-      <?php if ($this->phone): ?><?= $GLOBALS['TL_LANG']['steinmueller']['phone'] ?> <?= $this->phone ?><br><?php endif; ?>
-      <?php if ($this->mobile): ?><?= $GLOBALS['TL_LANG']['steinmueller']['mobile'] ?> <?= $this->mobile ?><br><?php endif; ?>
-      <?php if ($this->email): ?><a href="mailto:<?= $this->email ?>" title="<?= $GLOBALS['TL_LANG']['steinmueller']['email_to'] ?> <?= $this->firstname ?> <?= $this->lastname ?>"> <?= $GLOBALS['TL_LANG']['steinmueller']['write_email'] ?> </a><?php endif; ?>
-    </p>
-  </div>
-
+            <div class="company-details">
+                <span class="company-name"><strong><?= $company['title'] ?></strong></span><br>
+                <?php if ($company['geocoderAddress']): ?><span class="contact-adress"><?= $company['geocoderAddress'] ?></span><br><?php endif; ?>
+                <?php if ($company['geocoderCountry']): ?><span class="contact-country"><?= $company['geocoderCountry'] ?></span><br><?php endif; ?>
+                <?php if ($company['phone']): ?><span class="contact-phone"><?= $company['phone'] ?></span><br><?php endif; ?>
+                <?php if ($company['fax']): ?><span class="contact-fax"><?= $company['fax'] ?></span><br><?php endif; ?>
+                <?php if ($company['mobile']): ?><span class="contact-mobile"><?= $company['mobile'] ?></span><br><?php endif; ?>
+                <?php if ($company['email']): ?><span class="contact-email"><a href="mailto:<?= $company['email'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['email_to'], $company['title']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['email_to'], $company['title']) ?>"><?= $company['email'] ?></a></span><?php endif; ?>
+            </div>
+            <div class="company-social">
+                <?php if ($company['facebook']): ?><span class="contact-facebook"><a href="<?= $company['facebook'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitFacebook'], $company['title']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitFacebook'], $company['title']) ?>"><?= $company['facebook'] ?></a></span><br><?php endif; ?>
+                <?php if ($company['twitter']): ?><span class="contact-twitter"><a href="<?= $company['twitter'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitTwitter'], $company['title']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitTwitter'], $company['title']) ?>"><?= $company['twitter'] ?></a></span><br><?php endif; ?>
+                <?php if ($company['xing']): ?><span class="contact-xing"><a href="<?= $company['xing'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitXing'], $company['title']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitXing'], $company['title']) ?>"><?= $company['xing'] ?></a></span><br><?php endif; ?>
+                <?php if ($company['linkedin']): ?><span class="contact-linkedin"><a href="<?= $company['linkedin'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitLinkedin'], $company['title']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitLinkedin'], $company['title']) ?>"><?= $company['linkedin'] ?></a></span><br><?php endif; ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p class="error"><?= $GLOBALS['TL_LANG']['tl_companies']['noEntriesFound'] ?></p>
+<?php endif; ?>
 <?php $this->endblock(); ?>

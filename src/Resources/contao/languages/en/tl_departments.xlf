@@ -1,57 +1,61 @@
 <?xml version="1.0" ?><xliff version="1.1">
-    <file datatype="php" original="src/Resources/contao/languages/en/tl_departments.php" source-language="en" target-language="de">
+    <file datatype="php" original="src/Resources/contao/languages/en/tl_departments.php" source-language="en" target-language="en">
         <body>
             <trans-unit id="tl_departments.department_legend">
                 <source>Department</source>
-                <target>Abteilung</target>
+                <target>Department</target>
+            </trans-unit>
+            <trans-unit id="tl_departments.expert_legend">
+                <source>Expert settings</source>
+                <target>Expert settings</target>
             </trans-unit>
             <trans-unit id="tl_departments.new.0">
                 <source>New company</source>
-                <target>Neue Abteilung</target>
+                <target>New company</target>
             </trans-unit>
             <trans-unit id="tl_departments.new.1">
                 <source>Add a new department</source>
-                <target>Eine neue Abteilung anlegen</target>
+                <target>Add a new department</target>
             </trans-unit>
             <trans-unit id="tl_departments.edit.0">
                 <source>Edit department</source>
-                <target>Abteilung bearbeiten</target>
+                <target>Edit department</target>
             </trans-unit>
             <trans-unit id="tl_departments.edit.1">
                 <source>Edit department ID %s</source>
-                <target>Abteilung ID %s bearbeiten</target>
+                <target>Edit department ID %s</target>
             </trans-unit>
             <trans-unit id="tl_departments.delete.0">
                 <source>Delete department</source>
-                <target>Abteilung löschen</target>
+                <target>Delete department</target>
             </trans-unit>
             <trans-unit id="tl_departments.delete.1">
                 <source>Delete department ID %s</source>
-                <target>Abteilung ID %s löschen</target>
+                <target>Delete department ID %s</target>
             </trans-unit>
             <trans-unit id="tl_departments.show.0">
                 <source>Department details</source>
-                <target>Details der Abteilung</target>
+                <target>Department details</target>
             </trans-unit>
             <trans-unit id="tl_departments.show.1">
                 <source>Details of the department ID %s</source>
-                <target>Details der Abteilung ID %s anzeigen</target>
+                <target>Details of the department ID %s</target>
             </trans-unit>
             <trans-unit id="tl_departments.title.0">
                 <source>Department name</source>
-                <target>Name der Abteilung</target>
+                <target>Department name</target>
             </trans-unit>
             <trans-unit id="tl_departments.title.1">
                 <source>Add the name of the department</source>
-                <target>Geben Sie den Namen der Abteilung ein</target>
+                <target>Add the name of the department</target>
             </trans-unit>
             <trans-unit id="tl_departments.invisible.0">
                 <source>Invisible</source>
-                <target>Unsichtbar</target>
+                <target>Invisible</target>
             </trans-unit>
             <trans-unit id="tl_departments.invisible.1">
                 <source>Hide the department on the website</source>
-                <target>Die Abteilung auf der Webseite nicht anzeigen</target>
+                <target>Hide the department on the website</target>
             </trans-unit>
         </body>
     </file>

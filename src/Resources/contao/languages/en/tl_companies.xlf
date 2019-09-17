@@ -1,55 +1,198 @@
-<?php
-
-$GLOBALS['TL_LANG']['tl_companies']['company_legend'] = 'Company data';
-$GLOBALS['TL_LANG']['tl_companies']['company_social'] = 'Social Media der Firma';
-
-$GLOBALS['TL_LANG']['tl_companies']['new'][0] = 'New company';
-$GLOBALS['TL_LANG']['tl_companies']['new'][1] = 'Add a new company';
-
-$GLOBALS['TL_LANG']['tl_companies']['edit'][0] = 'Edit company';
-$GLOBALS['TL_LANG']['tl_companies']['edit'][1] = 'Edit Company ID %s';
-
-$GLOBALS['TL_LANG']['tl_companies']['delete'][0] = 'Delete company';
-$GLOBALS['TL_LANG']['tl_companies']['delete'][1] = 'Delete company ID %s';
-
-$GLOBALS['TL_LANG']['tl_companies']['show'][0] = 'Company details';
-$GLOBALS['TL_LANG']['tl_companies']['show'][1] = 'Details of the company ID %s';
-
-$GLOBALS['TL_LANG']['tl_companies']['company'][0] = 'Company name';
-$GLOBALS['TL_LANG']['tl_companies']['company'][1] = 'Add the name of the company.';
-
-$GLOBALS['TL_LANG']['tl_companies']['geocoderAddress'][0] = 'Full address';
-$GLOBALS['TL_LANG']['tl_companies']['geocoderAddress'][1] = 'Add the address of the company (Bsp.: Street 1, 12345 City).';
-
-$GLOBALS['TL_LANG']['tl_companies']['geocoderCountry'][0] = 'Country';
-$GLOBALS['TL_LANG']['tl_companies']['geocoderCountry'][1] = 'Choose the country.';
-
-$GLOBALS['TL_LANG']['tl_companies']['singleCoords'][0] = 'Coordinates';
-$GLOBALS['TL_LANG']['tl_companies']['singleCoords'][1] = 'Coordinates of the address (Will be generated automatically).';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_phone'][0] = 'Phone';
-$GLOBALS['TL_LANG']['tl_companies']['company_phone'][1] = 'Add the phone number of the company.';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_mobile'][0] = 'Mobile phone';
-$GLOBALS['TL_LANG']['tl_companies']['company_mobile'][1] = 'Add the mobile phone number of the company.';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_email'][0] = 'E-mail';
-$GLOBALS['TL_LANG']['tl_companies']['company_email'][1] = 'Add the e-mail of the company.';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_fax'][0] = 'Fax';
-$GLOBALS['TL_LANG']['tl_companies']['company_fax'][1] = 'Add the fax number of the company.';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_facebook'][0] = 'Facebook';
-$GLOBALS['TL_LANG']['tl_companies']['company_facebook'][1] = 'Add the Link to the facebook profile of the company.';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_googleplus'][0] = 'Google+';
-$GLOBALS['TL_LANG']['tl_companies']['company_googleplus'][1] = 'Add the Link to the google+ profile of the company';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_twitter'][0] = 'Twitter';
-$GLOBALS['TL_LANG']['tl_companies']['company_twitter'][1] = 'Add the Link to the twitter profile of the company';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_xing'][0] = 'Xing';
-$GLOBALS['TL_LANG']['tl_companies']['company_xing'][1] = 'Add the Link to the xing profile of the company';
-
-$GLOBALS['TL_LANG']['tl_companies']['company_linkedin'][0] = 'LinkedIn';
-$GLOBALS['TL_LANG']['tl_companies']['company_linkedin'][1] = 'Add the Link to the linkedin profile of the company';
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/tl_companies.php" source-language="en" target-language="en">
+        <body>
+            <trans-unit id="tl_companies.company_legend">
+                <source>Company</source>
+                <target>Company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.logo_legend">
+                <source>Logo</source>
+                <target>Logo</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.address_legend">
+                <source>Address data</source>
+                <target>Address data</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.contact_legend">
+                <source>Contact data</source>
+                <target>Contact data</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.social_legend">
+                <source>Social Media</source>
+                <target>Social Media</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.expert_legend">
+                <source>Expert settings</source>
+                <target>Expert settings</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.new.0">
+                <source>New company</source>
+                <target>New company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.new.1">
+                <source>Add a new company</source>
+                <target>Add a new company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.edit.0">
+                <source>Edit company</source>
+                <target>Edit company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.edit.1">
+                <source>Edit Company ID %s</source>
+                <target>Edit Company ID %s</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.delete.0">
+                <source>Delete company</source>
+                <target>Delete company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.delete.1">
+                <source>Delete company ID %s</source>
+                <target>Delete company ID %s</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.show.0">
+                <source>Company details</source>
+                <target>Company details</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.show.1">
+                <source>Details of the company ID %s</source>
+                <target>Details of the company ID %s</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.title.0">
+                <source>Company name</source>
+                <target>Company name</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.title.1">
+                <source>Add the name of the company</source>
+                <target>Add the name of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.geocoderAddress.0">
+                <source>Full address</source>
+                <target>Full address</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.geocoderAddress.1">
+                <source>Add the address of the company (Bsp.: Street 1, 12345 City)</source>
+                <target>Add the address of the company (Bsp.: Street 1, 12345 City)</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.geocoderCountry.0">
+                <source>Country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.geocoderCountry.1">
+                <source>Choose the country</source>
+                <target>Choose the country</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.singleCoords.0">
+                <source>Coordinates</source>
+                <target>Coordinates</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.singleCoords.1">
+                <source>Coordinates of the address (Will be generated automatically)</source>
+                <target>Coordinates of the address (Will be generated automatically)</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.phone.0">
+                <source>Phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.phone.1">
+                <source>Add the phone number of the company</source>
+                <target>Add the phone number of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.mobile.0">
+                <source>Mobile phone</source>
+                <target>Mobile phone</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.mobile.1">
+                <source>Add the mobile phone number of the company</source>
+                <target>Add the mobile phone number of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.email.0">
+                <source>E-mail</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.email.1">
+                <source>Add the e-mail of the company</source>
+                <target>Add the e-mail of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.fax.0">
+                <source>Fax</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.fax.1">
+                <source>Add the fax number of the company</source>
+                <target>Add the fax number of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.singleSRC.0">
+                <source>Logo</source>
+                <target>Logo</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.singleSRC.1">
+                <source>Add the Logo of the company</source>
+                <target>Add the Logo of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.facebook.0">
+                <source>Facebook</source>
+                <target>Facebook</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.facebook.1">
+                <source>Add the Link to the facebook profile of the company</source>
+                <target>Add the Link to the facebook profile of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.twitter.0">
+                <source>Twitter</source>
+                <target>Twitter</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.twitter.1">
+                <source>Add the Link to the twitter profile of the company</source>
+                <target>Add the Link to the twitter profile of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.xing.0">
+                <source>Xing</source>
+                <target>Xing</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.xing.1">
+                <source>Add the Link to the xing profile of the company</source>
+                <target>Add the Link to the xing profile of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.linkedin.0">
+                <source>LinkedIn</source>
+                <target>LinkedIn</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.linkedin.1">
+                <source>Add the Link to the linkedin profile of the company</source>
+                <target>Add the Link to the linkedin profile of the company</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.invisible.0">
+                <source>Invisible</source>
+                <target>Invisible</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.invisible.1">
+                <source>Hide the company on the website</source>
+                <target>Hide the company on the website</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.noEntriesFound">
+                <source>There were no entries found for your selection.</source>
+                <target>There were no entries found for your selection.</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.email_to">
+                <source>Send an Email to %s</source>
+                <target>Send an Email to %s</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.visitFacebook">
+                <source>Visit %s's profile on Facebook</source>
+                <target>Visit %s's profile on Facebook</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.visitTwitter">
+                <source>Visit %s's profile on Twitter</source>
+                <target>Visit %s's profile on Twitter</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.visitXing">
+                <source>Visit %s's profile on Xing</source>
+                <target>Visit %s's profile on Xing</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.visitLinkedin">
+                <source>Visit %s's profile on LinkedIn</source>
+                <target>Visit %s's profile on LinkedIn</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
