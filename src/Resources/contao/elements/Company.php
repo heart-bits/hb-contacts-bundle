@@ -10,6 +10,8 @@
 
 namespace Heartbits\ContaoContacts;
 
+use Contao\Database;
+
 
 /**
  * Front end content element "contact".
@@ -25,42 +27,6 @@ class Contact extends \ContentElement
 	 */
 	protected $strTemplate = 'ce_contact';
 
-	/**
-	 * Return if the image does not exist
-	 *
-	 * @return string
-	 */
-	public function generate()
-	{
-		$contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE id=?")->execute($this->contact_select);
-
-		if ($contactData->singleSRC == '')
-		{
-			return '';
-		}
-
-		$objFile = \FilesModel::findByUuid($contactData->singleSRC);
-
-		if ($objFile === null)
-		{
-			if (!\Validator::isUuid($contactData->singleSRC))
-			{
-				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-
-			return '';
-		}
-
-		if (!is_file(TL_ROOT . '/' . $objFile->path))
-		{
-			return '';
-		}
-
-		$this->singleSRC = $objFile->path;
-
-		return parent::generate();
-	}
-
 
 	/**
 	 * Generate the content element
@@ -74,7 +40,18 @@ class Contact extends \ContentElement
 			$this->Template 												= new \BackendTemplate('be_hb_contact');
 			$this->Template->lastname								= $contactData->lastname;
 			$this->Template->firstname							= $contactData->firstname;
-			$this->addImageToTemplate($this->Template, $this->arrData);
+
+			// Add an image
+            if ($contactData->addImage && $contactData->singleSRC != '')
+            {
+                $objModel = \FilesModel::findByUuid($contactData->singleSRC);
+
+                if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+                {
+                    $this->singleSRC = $objModel->path;
+                    $this->addImageToTemplate($this->Template, $this->arrData, null, null, $objModel);
+                }
+            }
 		}
 		else {
 			// Get database
@@ -153,7 +130,17 @@ class Contact extends \ContentElement
 			$this->Template->companyCoordsLong			= $companyData->singleCoords[1];
 
 
-			$this->addImageToTemplate($this->Template, $this->arrData);
+      // Add an image
+      if ($contactData->addImage && $contactData->singleSRC != '')
+      {
+          $objModel = \FilesModel::findByUuid($contactData->singleSRC);
+
+          if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+          {
+              $this->singleSRC = $objModel->path;
+              $this->addImageToTemplate($this->Template, $this->arrData, null, null, $objModel);
+          }
+      }
 		}
 	}
 }

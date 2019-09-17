@@ -8,13 +8,13 @@
  *
  */
 
-namespace Heartbits\Contao\Contacts\ContaoManager;
+namespace Heartbits\ContaoContacts\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Heartbits\Contao\Contacts\HeartbitsContaoContactsBundle;
+use Heartbits\ContaoContacts\HeartbitsContaoContactsBundle;
 
 /**
  * Class Plugin.
@@ -31,7 +31,6 @@ class Plugin implements BundlePluginInterface
         return [
             BundleConfig::create(HeartbitsContaoContactsBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
-                ->setReplace(['contacts']),
         ];
     }
 }

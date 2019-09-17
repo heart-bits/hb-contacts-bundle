@@ -8,7 +8,7 @@
  *
  */
 
-namespace Heartbits\Contao\Contacts;
+namespace Heartbits\ContaoContacts;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

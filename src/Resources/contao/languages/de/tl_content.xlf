@@ -1,0 +1,32 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en" target-language="de">
+        <body>
+        <trans-unit id="MOD.contacts.0">
+            <source>Contacts</source>
+            <target>Ansprechpartner</target>
+        </trans-unit>
+        <trans-unit id="MOD.contacts.1">
+            <source>Manage contacts</source>
+            <target>Ansprechpartner verwalten</target>
+        </trans-unit>
+        <trans-unit id="MOD.companies.0">
+            <source>Companies</source>
+            <target>Firmen</target>
+        </trans-unit>
+        <trans-unit id="MOD.companies.1">
+            <source>Manage companies</source>
+            <target>Firmen verwalten</target>
+        </trans-unit>
+        </body>
+    </file>
+</xliff>
+
+
+$GLOBALS['TL_LANG']['CTE']['contact'][0] = 'Ansprechpartner';
+$GLOBALS['TL_LANG']['CTE']['company'][0] = 'Firma';
+
+$GLOBALS['TL_LANG']['tl_content']['contact_select'][0] = 'Ansprechpartner';
+$GLOBALS['TL_LANG']['tl_content']['contact_select'][1] = 'Wählen Sie den gewünschten Ansprechpartner aus.';
+
+$GLOBALS['TL_LANG']['tl_content']['company_select'][0] = 'Firma';
+$GLOBALS['TL_LANG']['tl_content']['company_select'][1] = 'Wählen Sie die gewünschte Firma aus.';
