@@ -1,4 +1,4 @@
-article-backgrounds
+contao-columns
 ===================
 
-Just a little extension for the content management system 'contao', which allows the backend-user to use a individual background-image on every article.
+This contao extension allows the backend user to create companies, departments and contacts to display in the frontend.
