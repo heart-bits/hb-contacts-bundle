@@ -3,6 +3,7 @@
 namespace Heartbits\ContaoContacts;
 
 use Contao\Database;
+use Contao\Image\PictureInterface;
 
 class Company extends \ContentElement
 {
@@ -44,6 +45,8 @@ class Company extends \ContentElement
             }
             $this->Template->title = $title;
         } else {
+            $container = \System::getContainer();
+            $rootDir = $container->getParameter('kernel.project_dir');
             \System::loadLanguageFile('tl_companies');
             $arrCompanies = [];
             if (!empty($companyData)) {
@@ -53,6 +56,23 @@ class Company extends \ContentElement
                         if ($key === 'geocoderCountry') {
                             \System::loadLanguageFile('countries');
                             $arrCompanies[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];
+                        } elseif ($key === 'singleSRC') {
+                            if ($value !== '') {
+                                $objFile = \Contao\FilesModel::findByUuid($value);
+                                $path = $objFile->path;
+                                if ($objFile !== null || is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $path)) {
+                                    $picture = $container
+                                        ->get('contao.image.picture_factory')
+                                        ->create($rootDir . '/' . $path, \Contao\StringUtil::deserialize($this->size)[2]);
+                                    $data = [
+                                        'picture' => [
+                                            'img' => $picture->getImg($rootDir),
+                                            'sources' => $picture->getSources($rootDir),
+                                        ]
+                                    ];
+                                    $arrCompanies[$i][$key] = $data;
+                                }
+                            }
                         } else {
                             $arrCompanies[$i][$key] = $value;
                         }

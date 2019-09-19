@@ -6,9 +6,7 @@
     <?php foreach ($this->companies as $company): ?>
         <div class="company">
             <?php if ($company['singleSRC']): ?>
-                <figure class="image_container" itemscope itemtype="http://schema.org/ImageObject">
-                    {{picture::<?= $company['singleSRC'] ?><?php if ($this->size): ?>?size=<?= $this->size ?><?php endif; ?>}}
-                </figure>
+                <?php $this->insert('image', $company['singleSRC']); ?>
             <?php endif; ?>
 
             <div class="company-details">
