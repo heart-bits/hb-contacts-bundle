@@ -3,7 +3,6 @@
 namespace Heartbits\ContaoContacts;
 
 use Contao\Database;
-use Contao\Image\PictureInterface;
 
 class Company extends \ContentElement
 {
