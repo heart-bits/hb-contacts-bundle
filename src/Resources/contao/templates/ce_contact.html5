@@ -17,7 +17,7 @@
                 <?php if ($contact['phone']): ?><span class="contact-phone"><?= $contact['phone'] ?></span><br><?php endif; ?>
                 <?php if ($contact['fax']): ?><span class="contact-fax"><?= $contact['fax'] ?></span><br><?php endif; ?>
                 <?php if ($contact['mobile']): ?><span class="contact-mobile"><?= $contact['mobile'] ?></span><br><?php endif; ?>
-                <?php if ($contact['email']): ?><span class="contact-email"><a href="mailto:<?= $contact['email'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['email_to'], $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['email_to'], $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['email'] ?></a></span><?php endif; ?>
+                <?php if ($contact['email']): ?><span class="contact-email"><a href="mailto:<?= $contact['email'] ?>" title="<?= sprintf($this->trans('tl_contacts.email_to'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.email_to'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['email'] ?></a></span><?php endif; ?>
             </div>
             <div class="company-details">
                 <?php if ($contact['company']): ?><span class="contact-company"><?= $contact['company'] ?></span><br><?php endif; ?>
@@ -25,14 +25,14 @@
                 <?php if ($contact['position']): ?><span class="contact-position"><?= $contact['position'] ?></span><br><?php endif; ?>
             </div>
             <div class="contact-social">
-                <?php if ($contact['facebook']): ?><span class="contact-facebook"><a href="<?= $contact['facebook'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitFacebook'], $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitFacebook'], $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['facebook'] ?></a></span><br><?php endif; ?>
-                <?php if ($contact['twitter']): ?><span class="contact-twitter"><a href="<?= $contact['twitter'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitTwitter'], $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitTwitter'], $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['twitter'] ?></a></span><br><?php endif; ?>
-                <?php if ($contact['xing']): ?><span class="contact-xing"><a href="<?= $contact['xing'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitXing'], $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitXing'], $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['xing'] ?></a></span><br><?php endif; ?>
-                <?php if ($contact['linkedin']): ?><span class="contact-linkedin"><a href="<?= $contact['linkedin'] ?>" title="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitLinkedin'], $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($GLOBALS['TL_LANG']['tl_contacts']['visitLinkedin'], $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['linkedin'] ?></a></span><br><?php endif; ?>
+                <?php if ($contact['facebook']): ?><span class="contact-facebook"><a href="<?= $contact['facebook'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitFacebook'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.visitFacebook'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['facebook'] ?></a></span><br><?php endif; ?>
+                <?php if ($contact['twitter']): ?><span class="contact-twitter"><a href="<?= $contact['twitter'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitTwitter'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.visitTwitter'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['twitter'] ?></a></span><br><?php endif; ?>
+                <?php if ($contact['xing']): ?><span class="contact-xing"><a href="<?= $contact['xing'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitXing'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.visitXing'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['xing'] ?></a></span><br><?php endif; ?>
+                <?php if ($contact['linkedin']): ?><span class="contact-linkedin"><a href="<?= $contact['linkedin'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitLinkedin'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.visitLinkedin'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['linkedin'] ?></a></span><br><?php endif; ?>
             </div>
         </div>
     <?php endforeach; ?>
 <?php else: ?>
-    <p class="error"><?= $GLOBALS['TL_LANG']['tl_contacts']['noEntriesFound'] ?></p>
+    <p class="error"><?= $this->trans('tl_contacts.noEntriesFound') ?></p>
 <?php endif; ?>
 <?php $this->endblock(); ?>
