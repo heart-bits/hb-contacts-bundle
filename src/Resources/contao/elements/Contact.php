@@ -69,7 +69,7 @@ class Contact extends \ContentElement
                             if ($value !== '') {
                                 $objFile = \Contao\FilesModel::findByUuid($value);
                                 $path = $objFile->path;
-                                if ($objFile !== null || is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $path)) {
+                                if ($objFile !== null || is_file(\Contao\System::getContainer()->getParameter('kernel.project_dir') . '/' . $path)) {
                                     $picture = $container
                                         ->get('contao.image.picture_factory')
                                         ->create($rootDir . '/' . $path, \Contao\StringUtil::deserialize($this->size)[2]);
