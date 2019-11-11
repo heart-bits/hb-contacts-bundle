@@ -98,6 +98,7 @@ $GLOBALS['TL_DCA']['tl_departments'] = array
 
         'title' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_departments']['title'],
             'inputType' => 'text',
             'exclude' => true,
             'sorting' => true,
@@ -112,6 +113,7 @@ $GLOBALS['TL_DCA']['tl_departments'] = array
 
         'invisible' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_departments']['invisible'],
             'exclude'                 => true,
             'filter'                  => true,
             'inputType'               => 'checkbox',

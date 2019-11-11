@@ -98,6 +98,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'title' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['title'],
             'inputType' => 'text',
             'exclude' => true,
             'search' => true,
@@ -111,6 +112,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'phone' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['phone'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -123,6 +125,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'mobile' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['mobile'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -134,6 +137,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'email' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['email'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -145,6 +149,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'fax' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['fax'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -156,6 +161,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'singleSRC' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['singleSRC'],
             'exclude' => true,
             'inputType' => 'fileTree',
             'eval' => array(
@@ -169,6 +175,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'facebook' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['facebook'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -181,6 +188,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'twitter' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['twitter'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -193,6 +201,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'xing' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['xing'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -205,6 +214,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'linkedin' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['linkedin'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -217,6 +227,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'geocoderAddress' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['geocoderAddress'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -231,6 +242,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'geocoderCountry' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['geocoderCountry'],
             'exclude' => true,
             'inputType' => 'select',
             'options' => $this->getCountries(),
@@ -243,6 +255,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'singleCoords' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['singleCoords'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => array(
@@ -257,6 +270,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
 
         'invisible' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_companies']['invisible'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'checkbox',

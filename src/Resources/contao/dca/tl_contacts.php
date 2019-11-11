@@ -98,6 +98,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'firstname' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['firstname'],
             'inputType' => 'text',
             'exclude' => true,
             'sorting' => true,
@@ -113,6 +114,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'lastname' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['lastname'],
             'inputType' => 'text',
             'exclude' => true,
             'sorting' => true,
@@ -128,6 +130,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'singleSRC' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['singleSRC'],
             'exclude' => true,
             'inputType' => 'fileTree',
             'eval' => array(
@@ -141,6 +144,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'geocoderAddress' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['geocoderAddress'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -156,6 +160,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'geocoderCountry' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['geocoderCountry'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'select',
@@ -169,6 +174,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'singleCoords' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['singleCoords'],
             'exclude' => true,
             'search' => true,
             'inputType' => 'text',
@@ -185,6 +191,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'phone' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['phone'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -196,6 +203,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'mobile' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['mobile'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -207,6 +215,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'email' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['email'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -218,6 +227,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'company' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['company'],
             'exclude' => true,
             'sorting' => true,
             'flag' => 1,
@@ -233,6 +243,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'fax' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['fax'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -244,6 +255,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'position' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['position'],
             'inputType' => 'text',
             'exclude' => true,
             'sorting' => true,
@@ -256,6 +268,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'department' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['department'],
             'exclude' => true,
             'sorting' => true,
             'filter' => true,
@@ -272,6 +285,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'birthday' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['birthday'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -285,6 +299,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'facebook' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['facebook'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -297,6 +312,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'twitter' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['twitter'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -309,6 +325,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'xing' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['xing'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -321,6 +338,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'linkedin' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['linkedin'],
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
@@ -333,6 +351,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
 
         'invisible' => array
         (
+            'label' => &$GLOBALS['TL_LANG']['tl_contacts']['invisible'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'checkbox',
