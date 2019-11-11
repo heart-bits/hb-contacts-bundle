@@ -2,7 +2,12 @@
 
 namespace Heartbits\ContaoContacts;
 
+use Contao\ContentElement;
 use Contao\Database;
+use Contao\System;
+use Contao\StringUtil;
+use Contao\FilesModel;
+use Contao\BackendTemplate;
 
 class Contact extends \ContentElement
 {
@@ -22,8 +27,6 @@ class Contact extends \ContentElement
         // Get selected Contact/s from database
         if (!$this->useSingleContact && $this->department_select && $this->company_select) {
             $contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE department=? AND company=? AND invisible=''")->execute($this->department_select, $this->company_select)->fetchAllAssoc();
-        } elseif (!$this->useSingleContact && $this->department_select) {
-            $contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE department=? AND invisible=''")->execute($this->department_select)->fetchAllAssoc();
         } elseif (!$this->useSingleContact && $this->company_select) {
             $contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE company=? AND invisible=''")->execute($this->company_select)->fetchAllAssoc();
         } elseif($this->useSingleContact && $this->contact_select) {
@@ -32,7 +35,7 @@ class Contact extends \ContentElement
 
         // Push selected Contact/s to template
         if (TL_MODE == 'BE') {
-            $this->Template = new \BackendTemplate('be_wildcard');
+            $this->Template = new BackendTemplate('be_wildcard');
             $title = '';
             if (!empty($contactData)) {
                 $contactCount = count($contactData);
@@ -48,9 +51,9 @@ class Contact extends \ContentElement
             }
             $this->Template->title = $title;
         } else {
-            $container = \System::getContainer();
+            $container = System::getContainer();
             $rootDir = $container->getParameter('kernel.project_dir');
-            \System::loadLanguageFile('tl_contacts');
+            System::loadLanguageFile('tl_contacts');
             $arrContacts = [];
             if (!empty($contactData)) {
                 $i = 0;
@@ -63,16 +66,16 @@ class Contact extends \ContentElement
                             $company = Database::getInstance()->prepare("SELECT title FROM tl_companies WHERE id=? AND invisible=''")->execute($value);
                             $arrContacts[$i][$key] = $company->title;
                         } elseif ($key === 'geocoderCountry') {
-                            \System::loadLanguageFile('countries');
+                            System::loadLanguageFile('countries');
                             $arrContacts[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];
                         } elseif ($key === 'singleSRC') {
                             if ($value !== '') {
-                                $objFile = \Contao\FilesModel::findByUuid($value);
+                                $objFile = FilesModel::findByUuid($value);
                                 $path = $objFile->path;
-                                if ($objFile !== null || is_file(\Contao\System::getContainer()->getParameter('kernel.project_dir') . '/' . $path)) {
+                                if ($objFile !== null || is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $path)) {
                                     $picture = $container
                                         ->get('contao.image.picture_factory')
-                                        ->create($rootDir . '/' . $path, \Contao\StringUtil::deserialize($this->size)[2]);
+                                        ->create($rootDir . '/' . $path, StringUtil::deserialize($this->size)[2]);
                                     $data = [
                                         'picture' => [
                                             'img' => $picture->getImg($rootDir),
@@ -88,7 +91,7 @@ class Contact extends \ContentElement
                     }
                     $i++;
                 }
-                $this->Template->size = \Contao\StringUtil::deserialize($this->size)[2];
+                $this->Template->size = StringUtil::deserialize($this->size)[2];
                 $this->Template->contacts = $arrContacts;
             }
         }
