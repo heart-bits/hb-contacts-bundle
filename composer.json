@@ -17,12 +17,12 @@
 		"source":"https://github.com/heart-bits/hb-contacts-bundle"
 	},
   "require":{
-    "php":">=5.6.0",
-    "contao/core-bundle": "~4.4",
+    "php":">=7.1.0",
+    "contao/core-bundle": "~4.8",
     "delahaye/dlh_geocode": "~1.0"
   },
   "require-dev": {
-    "contao/manager-bundle": "~4.4"
+    "contao/manager-bundle": "~4.8"
   },
   "autoload": {
     "psr-4": { "Heartbits\\ContaoContacts\\": "src/" },
