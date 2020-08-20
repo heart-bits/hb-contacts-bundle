@@ -20,7 +20,7 @@
                 <?php if ($contact['email']): ?><span class="contact-email"><a href="mailto:<?= $contact['email'] ?>" title="<?= sprintf($this->trans('tl_contacts.email_to'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.email_to'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['email'] ?></a></span><?php endif; ?>
             </div>
             <div class="company-details">
-                <?php if ($contact['company']): ?><span class="contact-company"><?= $contact['company'] ?></span><br><?php endif; ?>
+                <?php if ($contact['company']): ?><span class="contact-company"><?php if ($contact['company_href']): ?><a href="<?= $contact['company_href'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitWebsite'), $contact['company']) ?>"><?= $contact['company'] ?></a><?php endif; ?></span><br><?php endif; ?>
                 <?php if ($contact['department']): ?><span class="contact-department"><?= $contact['department'] ?></span><br><?php endif; ?>
                 <?php if ($contact['position']): ?><span class="contact-position"><?= $contact['position'] ?></span><br><?php endif; ?>
             </div>

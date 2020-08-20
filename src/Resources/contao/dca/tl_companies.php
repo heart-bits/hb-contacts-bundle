@@ -80,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
     'palettes' => array
     (
         '__selector__' => array('title'),
-        'default' => '{company_legend},title;{logo_legend},singleSRC;{address_legend},geocoderAddress,singleCoords,geocoderCountry;{contact_legend},phone,fax,mobile,email;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
+        'default' => '{company_legend},title,href;{logo_legend},singleSRC;{address_legend},geocoderAddress,geocoderCountry;{contact_legend},phone,fax,mobile,email;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
     ),
 
     // Fields
@@ -105,6 +105,17 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
                 'mandatory' => true,
                 'maxlength' => 255,
                 'tl_class' => 'w50 clr'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+
+        'href' => array
+        (
+            'inputType' => 'text',
+            'exclude' => true,
+            'eval' => array(
+                'maxlength' => 255,
+                'tl_class' => 'w50'
             ),
             'sql' => "varchar(255) NOT NULL default ''"
         ),
@@ -223,10 +234,10 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
                 'maxlength' => 255,
                 'tl_class' => 'w50 clr'
             ),
-            'sql' => "varchar(255) NOT NULL default ''",
+            'sql' => "varchar(255) NOT NULL default ''"/*,
             'save_callback' => array(
                 array('tl_companies', 'generateCoords')
-            )
+            )*/
         ),
 
         'geocoderCountry' => array
@@ -241,7 +252,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             'sql' => "varchar(2) NOT NULL default 'de'"
         ),
 
-        'singleCoords' => array
+        /*'singleCoords' => array
         (
             'exclude' => true,
             'inputType' => 'text',
@@ -253,7 +264,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             'save_callback' => array(
                 array('tl_companies', 'generateCoords')
             )
-        ),
+        ),*/
 
         'invisible' => array
         (

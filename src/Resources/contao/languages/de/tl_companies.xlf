@@ -65,6 +65,14 @@
                 <source>Add the name of the company</source>
                 <target>Geben Sie den Unternehmensnamen ein</target>
             </trans-unit>
+            <trans-unit id="tl_companies.href.0">
+                <source>Website</source>
+                <target>Webseite</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.href.1">
+                <source>Add the Link to the company website</source>
+                <target>Geben Sie den Link zur Unternehmens-Webseite ein</target>
+            </trans-unit>
             <trans-unit id="tl_companies.geocoderAddress.0">
                 <source>Full address</source>
                 <target>Vollständige Adresse</target>
@@ -173,23 +181,27 @@
                 <source>There were no entries found for your selection.</source>
                 <target>Es wurden keine Einträge zu Ihrer Eingabe gefunden.</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.email_to">
+            <trans-unit id="tl_companies.email_to">
                 <source>Send an Email to %s</source>
                 <target>Eine E-Mail an %s senden</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitFacebook">
+            <trans-unit id="tl_companies.visitWebsite">
+                <source>Visit %s's website</source>
+                <target>Besuchen Sie die Unternehmenswebseite von %s</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.visitFacebook">
                 <source>Visit %s's profile on Facebook</source>
                 <target>Besuchen Sie das Profil von %s auf Facebook</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitTwitter">
+            <trans-unit id="tl_companies.visitTwitter">
                 <source>Visit %s's profile on Twitter</source>
                 <target>Besuchen Sie das Profil von %s auf Twitter</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitXing">
+            <trans-unit id="tl_companies.visitXing">
                 <source>Visit %s's profile on Xing</source>
                 <target>Besuchen Sie das Profil von %s auf Xing</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitLinkedin">
+            <trans-unit id="tl_companies.visitLinkedin">
                 <source>Visit %s's profile on LinkedIn</source>
                 <target>Besuchen Sie das Profil von %s auf LinkedIn</target>
             </trans-unit>

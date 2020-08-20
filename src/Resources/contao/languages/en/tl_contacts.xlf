@@ -218,6 +218,10 @@
                 <source>Send an Email to %s</source>
                 <target>Send an Email to %s</target>
             </trans-unit>
+            <trans-unit id="tl_contacts.visitWebsite">
+                <source>Visit %s's website</source>
+                <target>Visit %s's website</target>
+            </trans-unit>
             <trans-unit id="tl_contacts.visitFacebook">
                 <source>Visit %s's profile on Facebook</source>
                 <target>Visit %s's profile on Facebook</target>

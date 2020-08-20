@@ -63,8 +63,9 @@ class Contact extends ContentElement
                             $department = Database::getInstance()->prepare("SELECT title FROM tl_departments WHERE id=? AND invisible=''")->execute($value);
                             $arrContacts[$i][$key] = $department->title;
                         } elseif ($key === 'company') {
-                            $company = Database::getInstance()->prepare("SELECT title FROM tl_companies WHERE id=? AND invisible=''")->execute($value);
+                            $company = Database::getInstance()->prepare("SELECT title, href FROM tl_companies WHERE id=? AND invisible=''")->execute($value);
                             $arrContacts[$i][$key] = $company->title;
+                            $arrContacts[$i]['company_href'] = $company->href;
                         } elseif ($key === 'geocoderCountry') {
                             System::loadLanguageFile('countries');
                             $arrContacts[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];

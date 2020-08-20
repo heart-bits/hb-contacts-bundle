@@ -65,6 +65,14 @@
                 <source>Add the name of the company</source>
                 <target>Add the name of the company</target>
             </trans-unit>
+            <trans-unit id="tl_companies.href.0">
+                <source>Website</source>
+                <target>Website</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.href.1">
+                <source>Add the Link to the company website</source>
+                <target>Add the Link to the company website</target>
+            </trans-unit>
             <trans-unit id="tl_companies.geocoderAddress.0">
                 <source>Full address</source>
                 <target>Full address</target>
@@ -177,19 +185,23 @@
                 <source>Send an Email to %s</source>
                 <target>Send an Email to %s</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitFacebook">
+            <trans-unit id="tl_companies.visitWebsite">
+                <source>Visit %s's website</source>
+                <target>Besuchen Sie die Unternehmenswebseite von %s</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.visitFacebook">
                 <source>Visit %s's profile on Facebook</source>
                 <target>Visit %s's profile on Facebook</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitTwitter">
+            <trans-unit id="tl_companies.visitTwitter">
                 <source>Visit %s's profile on Twitter</source>
                 <target>Visit %s's profile on Twitter</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitXing">
+            <trans-unit id="tl_companies.visitXing">
                 <source>Visit %s's profile on Xing</source>
                 <target>Visit %s's profile on Xing</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.visitLinkedin">
+            <trans-unit id="tl_companies.visitLinkedin">
                 <source>Visit %s's profile on LinkedIn</source>
                 <target>Visit %s's profile on LinkedIn</target>
             </trans-unit>

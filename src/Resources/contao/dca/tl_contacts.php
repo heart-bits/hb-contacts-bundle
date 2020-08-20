@@ -80,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
     'palettes' => array
     (
         '__selector__' => array('lastname', 'firstname'),
-        'default' => '{person_legend},lastname,firstname,department,birthday,position;{image_legend},singleSRC;{contact_legend},phone,fax,mobile,email,company;{address_legend},geocoderAddress,singleCoords,geocoderCountry;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
+        'default' => '{person_legend},lastname,firstname,department,birthday,position;{image_legend},singleSRC;{contact_legend},phone,fax,mobile,email,company;{address_legend},geocoderAddress,geocoderCountry;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
     ),
 
     // Fields
@@ -147,11 +147,11 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
                 'maxlength' => 255,
                 'tl_class' => 'w50 clr'
             ),
-            'sql' => "varchar(255) NOT NULL default ''",
+            'sql' => "varchar(255) NOT NULL default ''"/*,
             'save_callback' => array
             (
                 array('tl_contacts', 'generateCoords')
-            )
+            )*/
         ),
 
         'geocoderCountry' => array
@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
             'sql' => "varchar(2) NOT NULL default 'de'"
         ),
 
-        'singleCoords' => array
+        /*'singleCoords' => array
         (
             'exclude' => true,
             'search' => true,
@@ -181,7 +181,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
             (
                 array('tl_contacts', 'generateCoords')
             )
-        ),
+        ),*/
 
         'phone' => array
         (
