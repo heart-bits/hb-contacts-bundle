@@ -10,7 +10,7 @@
             <?php endif; ?>
 
             <div class="company-details">
-                <span class="company-name"><strong><?php if ($company['href']): ?><a href="<?= $company['href'] ?>" title="<?= sprintf($this->trans('tl_companies.visitWebsite'), $company['title']) ?>"><?= $company['title'] ?></a><?php endif; ?></strong></span><br>
+                <span class="company-name"><strong><?php if ($company['href']): ?><a href="<?= $company['href'] ?>" title="<?= sprintf($this->trans('tl_companies.visitWebsite'), $company['title']) ?>"><?php endif; ?><?= $company['title'] ?><?php if ($company['href']): ?></a><?php endif; ?></strong></span><br>
                 <?php if ($company['geocoderAddress']): ?><span class="contact-adress"><?= $company['geocoderAddress'] ?></span><br><?php endif; ?>
                 <?php if ($company['geocoderCountry']): ?><span class="contact-country"><?= $company['geocoderCountry'] ?></span><br><?php endif; ?>
                 <?php if ($company['phone']): ?><span class="contact-phone"><?= $company['phone'] ?></span><br><?php endif; ?>
