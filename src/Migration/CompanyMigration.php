@@ -30,8 +30,8 @@ class CompanyMigration extends AbstractMigration
         $columns = $schemaManager->listTableColumns('tl_companies');
 
         return
-            isset($columns['geocoderAddress']) &&
-            isset($columns['geocoderCountry']) &&
+            isset($columns['geocoderaddress']) &&
+            isset($columns['geocodercountry']) &&
             !isset($columns['street']) &&
             !isset($columns['zip']) &&
             !isset($columns['city']) &&

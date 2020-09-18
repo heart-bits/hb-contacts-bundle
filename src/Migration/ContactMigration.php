@@ -30,8 +30,8 @@ class ContactMigration extends AbstractMigration
         $columns = $schemaManager->listTableColumns('tl_contacts');
 
         return
-            isset($columns['geocoderAddress']) &&
-            isset($columns['geocoderCountry']) &&
+            isset($columns['geocoderaddress']) &&
+            isset($columns['geocodercountry']) &&
             isset($columns['company']) &&
             !isset($columns['pid']) &&
             !isset($columns['street']) &&
@@ -46,14 +46,13 @@ class ContactMigration extends AbstractMigration
         $this->connection->query('ALTER TABLE tl_contacts ADD zip CHAR(5) NOT NULL default ""');
         $this->connection->query('ALTER TABLE tl_contacts ADD city varchar(255) NOT NULL default ""');
         $this->connection->query('ALTER TABLE tl_contacts ADD country varchar(2) NOT NULL default "de"');
-        $this->connection->query('ALTER TABLE tl_contacts ADD pid int(10) unsigned NOT NULL default "0"');
+        $this->connection->query('ALTER TABLE tl_contacts ADD pid int(10) unsigned NOT NULL default "1"');
 
         // Set old company as new pid
-        $this->connection->executeUpdate('UPDATE tl_contacts SET pid = company');
         $this->connection->executeUpdate('UPDATE tl_contacts SET country = geocoderCountry');
 
         // Get all contacts and split the addresses into the corresponding fields
-        $contacts = $this->connection->fetchAll('SELECT id,geocoderAddress FROM tl_contacts');
+        $contacts = $this->connection->fetchAll('SELECT id,geocoderAddress,company FROM tl_contacts');
         foreach ($contacts as $contact) {
             $street = '';
             $zip = '';
@@ -68,7 +67,12 @@ class ContactMigration extends AbstractMigration
                 $zip = $arrCity[0];
                 $city = $arrCity[1];
             }
-            $this->connection->executeUpdate('UPDATE tl_contacts SET street=:street, zip=:zip, city=:city WHERE id=:id', array(':street' => $street, ':zip' => $zip, ':city' => $city, ':id' => $contact['id']));
+            $company = $contact['company'];
+            if (is_null($company)) {
+                $companies = $this->connection->fetchAll('SELECT id FROM tl_companies');
+                $company = intval($companies[0]['id']);
+            }
+            $this->connection->executeUpdate('UPDATE tl_contacts SET company=:company, street=:street, zip=:zip, city=:city WHERE id=:id', array(':company' => $company, ':street' => $street, ':zip' => $zip, ':city' => $city, ':id' => $contact['id']));
         }
 
         return new MigrationResult(
