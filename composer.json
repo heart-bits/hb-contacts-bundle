@@ -18,8 +18,7 @@
 	},
   "require":{
     "php":">=7.1.0",
-    "contao/core-bundle": "~4.9",
-    "delahaye/dlh_geocode": "~1.0"
+    "contao/core-bundle": "~4.9"
   },
   "require-dev": {
     "contao/manager-bundle": "~4.9"

@@ -25,10 +25,10 @@ class Company extends ContentElement
     protected function compile()
     {
         // Get selected Company/ies from template
-        if (!$this->useSingleCompany && $this->country_select) {
+        if ($this->useSingleCompany && $this->company_select) {
             $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE id=? AND invisible=''")->limit(1)->execute($this->company_select)->fetchAllAssoc();
-        } elseif ($this->useSingleCompany && $this->company_select) {
-            $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE geocoderCountry=? AND invisible=''")->execute($this->country_select)->fetchAllAssoc();
+        } else {
+            $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE country=? AND invisible=''")->execute($this->country_select)->fetchAllAssoc();
         }
 
         // Push selected Company/ies to template
@@ -40,9 +40,9 @@ class Company extends ContentElement
                 $i = 1;
                 foreach ($companyData as $company) {
                     if ($companyCount === $i) {
-                        $title .= $company['title'] . ' (' . $company['geocoderAddress'] . ')<br>';
+                        $title .= $company['title'] . ' (' . $company['street'] . ', ' . $company['zip'] . $company['city'] . ')';
                     } else {
-                        $title .= $company['title'] . ' (' . $company['geocoderAddress'] . '),<br>';
+                        $title .= $company['title'] . ' (' . $company['street'] . ', ' . $company['zip'] . $company['city'] . '),<br>';
                     }
                     $i++;
                 }
@@ -57,7 +57,7 @@ class Company extends ContentElement
                 $i = 0;
                 foreach ($companyData as $company) {
                     foreach ($company as $key => $value) {
-                        if ($key === 'geocoderCountry') {
+                        if ($key === 'country') {
                             System::loadLanguageFile('countries');
                             $arrCompanies[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];
                         } elseif ($key === 'singleSRC') {

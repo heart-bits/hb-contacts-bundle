@@ -10,8 +10,8 @@
                 <target>Expert settings</target>
             </trans-unit>
             <trans-unit id="tl_departments.new.0">
-                <source>New company</source>
-                <target>New company</target>
+                <source>New department</source>
+                <target>New department</target>
             </trans-unit>
             <trans-unit id="tl_departments.new.1">
                 <source>Add a new department</source>

@@ -3,16 +3,8 @@
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['content']['contacts'] = array(
-    'tables' => array('tl_contacts')
-);
-
-$GLOBALS['BE_MOD']['content']['departments'] = array(
-    'tables' => array('tl_departments')
-);
-
 $GLOBALS['BE_MOD']['content']['companies'] = array(
-    'tables' => array('tl_companies')
+    'tables' => array('tl_companies', 'tl_contacts', 'tl_departments')
 );
 
 /**
@@ -26,3 +18,9 @@ $GLOBALS['TL_CTE']['company'] = array
 (
     'company'   => 'Heartbits\ContaoContacts\Company'
 );
+
+/**
+ * Models
+ */
+$GLOBALS['TL_MODELS']['tl_companies']          = 'Heartbits\ContaoContacts\Models\PortfolioModel';
+$GLOBALS['TL_MODELS']['tl_departments'] = 'Heartbits\ContaoContacts\Models\PortfolioCategoryModel';

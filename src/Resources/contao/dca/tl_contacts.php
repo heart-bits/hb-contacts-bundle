@@ -7,6 +7,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
     'config' => array
     (
         'dataContainer' => 'Table',
+        'ptable' => 'tl_companies',
         'enableVersioning' => true,
         'sql' => array
         (
@@ -22,10 +23,11 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
     (
         'sorting' => array
         (
-            'mode' => 2,
+            'mode' => 4,
             'fields' => array('lastname'),
-            'flag' => 1,
-            'panelLayout' => 'filter;sort,search,limit'
+            'panelLayout' => 'filter;search,limit',
+            'headerFields' => array('title'),
+            'child_record_callback' => array('tl_contacts', 'listContacts'),
         ),
         'label' => array
         (
@@ -37,6 +39,13 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
         ),
         'global_operations' => array
         (
+            'departments' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_contacts']['department_legend'],
+                'href' => 'table=tl_departments',
+                'icon' => 'bundles/heartbitscontaocontacts/bookmarks.svg',
+                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="c"',
+            ),
             'all' => array
             (
                 'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -51,17 +60,30 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
             (
                 'label' => &$GLOBALS['TL_LANG']['tl_contacts']['edit'],
                 'href' => 'act=edit',
-                'icon' => 'edit.gif'
+                'icon' => 'edit.svg'
+            ),
+            'copy' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_contacts']['copy'],
+                'href' => 'act=paste&amp;mode=copy',
+                'icon' => 'copy.svg',
+                'attributes' => 'onclick="Backend.getScrollOffset()"'
+            ),
+            'cut' => array
+            (
+                'href' => 'act=paste&amp;mode=cut',
+                'icon' => 'cut.svg'
             ),
             'delete' => array
             (
                 'label' => &$GLOBALS['TL_LANG']['tl_contacts']['delete'],
                 'href' => 'act=delete',
-                'icon' => 'delete.gif',
+                'icon' => 'delete.svg',
                 'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
             ),
             'toggle' => array
             (
+                'label' => &$GLOBALS['TL_LANG']['tl_contacts']['toggle'],
                 'icon' => 'visible.svg',
                 'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'button_callback' => array('tl_contacts', 'toggleIcon')
@@ -80,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
     'palettes' => array
     (
         '__selector__' => array('lastname', 'firstname'),
-        'default' => '{person_legend},lastname,firstname,department,birthday,position;{image_legend},singleSRC;{contact_legend},phone,fax,mobile,email,company;{address_legend},geocoderAddress,geocoderCountry;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
+        'default' => '{person_legend},lastname,firstname,department,birthday,position;{image_legend},singleSRC;{contact_legend},phone,fax,mobile,email;{address_legend},street,zip,city,country;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
     ),
 
     // Fields
@@ -89,6 +111,11 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
         'id' => array
         (
             'sql' => "int(10) unsigned NOT NULL auto_increment"
+        ),
+
+        'pid' => array
+        (
+            'sql' => "int(10) unsigned NOT NULL default '0'",
         ),
 
         'tstamp' => array
@@ -139,22 +166,40 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
             'sql' => "binary(16) NULL"
         ),
 
-        'geocoderAddress' => array
+        'street' => array
         (
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
                 'maxlength' => 255,
-                'tl_class' => 'w50 clr'
+                'tl_class' => 'w50'
             ),
-            'sql' => "varchar(255) NOT NULL default ''"/*,
-            'save_callback' => array
-            (
-                array('tl_contacts', 'generateCoords')
-            )*/
+            'sql' => "varchar(255) NOT NULL default ''"
         ),
 
-        'geocoderCountry' => array
+        'zip' => array
+        (
+            'inputType' => 'text',
+            'exclude' => true,
+            'eval' => array(
+                'maxlength' => 255,
+                'tl_class' => 'w50'
+            ),
+            'sql' => "CHAR(5) NOT NULL default ''"
+        ),
+
+        'city' => array
+        (
+            'inputType' => 'text',
+            'exclude' => true,
+            'eval' => array(
+                'maxlength' => 255,
+                'tl_class' => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+
+        'country' => array
         (
             'exclude' => true,
             'filter' => true,
@@ -162,26 +207,10 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
             'options' => $this->getCountries(),
             'eval' => array(
                 'includeBlankOption' => true,
-                'tl_class' => 'w50 clr'
+                'tl_class' => 'w50'
             ),
             'sql' => "varchar(2) NOT NULL default 'de'"
         ),
-
-        /*'singleCoords' => array
-        (
-            'exclude' => true,
-            'search' => true,
-            'inputType' => 'text',
-            'eval' => array(
-                'maxlength' => 64,
-                'tl_class' => 'w50'
-            ),
-            'sql' => "varchar(64) NOT NULL default ''",
-            'save_callback' => array
-            (
-                array('tl_contacts', 'generateCoords')
-            )
-        ),*/
 
         'phone' => array
         (
@@ -214,21 +243,6 @@ $GLOBALS['TL_DCA']['tl_contacts'] = array
                 'tl_class' => 'w50'
             ),
             'sql' => "varchar(255) NOT NULL default ''"
-        ),
-
-        'company' => array
-        (
-            'exclude' => true,
-            'sorting' => true,
-            'flag' => 1,
-            'search' => true,
-            'sql' => 'int(100) unsigned NULL',
-            'foreignKey' => 'tl_companies.CONCAT(title," (",geocoderAddress,")")',
-            'inputType' => 'select',
-            'eval' => array(
-                'includeBlankOption' => true,
-                'tl_class' => 'w50'
-            )
         ),
 
         'fax' => array
@@ -353,17 +367,6 @@ class tl_contacts extends \Backend
 {
 
     /**
-     * Get geo coodinates from address
-     * @param string
-     * @param object
-     * @return string
-     */
-    function generateCoords($varValue, DataContainer $dc)
-    {
-        return $varValue ? $varValue : \delahaye\GeoCode::getCoordinates($dc->activeRecord->geocoderAddress, $dc->activeRecord->geocoderCountry, 'de');
-    }
-
-    /**
      * Return the "toggle visibility" button
      *
      * @param array $row
@@ -475,5 +478,17 @@ class tl_contacts extends \Backend
         }
 
         $objVersions->create();
+    }
+
+    /**
+     * List a contact
+     *
+     * @param array $arrRow
+     *
+     * @return string
+     */
+    public function listContacts($arrRow)
+    {
+        return '<div class="tl_content_left">' . $arrRow['lastname'] . ', ' . $arrRow['firstname'] . '</div>';
     }
 }

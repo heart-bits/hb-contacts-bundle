@@ -11,8 +11,8 @@
 
             <div class="company-details">
                 <span class="company-name"><strong><?php if ($company['href']): ?><a href="<?= $company['href'] ?>" title="<?= sprintf($this->trans('tl_companies.visitWebsite'), $company['title']) ?>"><?php endif; ?><?= $company['title'] ?><?php if ($company['href']): ?></a><?php endif; ?></strong></span><br>
-                <?php if ($company['geocoderAddress']): ?><span class="contact-adress"><?= $company['geocoderAddress'] ?></span><br><?php endif; ?>
-                <?php if ($company['geocoderCountry']): ?><span class="contact-country"><?= $company['geocoderCountry'] ?></span><br><?php endif; ?>
+                <?php if ($company['street'] || $company['zip'] || $company['city']): ?><span class="contact-adress"><?= $company['street'] ?>, <?= $company['zip'] ?> <?= $company['city'] ?></span><br><?php endif; ?>
+                <?php if ($company['country']): ?><span class="contact-country"><?= $company['country'] ?></span><br><?php endif; ?>
                 <?php if ($company['phone']): ?><span class="contact-phone"><?= $company['phone'] ?></span><br><?php endif; ?>
                 <?php if ($company['fax']): ?><span class="contact-fax"><?= $company['fax'] ?></span><br><?php endif; ?>
                 <?php if ($company['mobile']): ?><span class="contact-mobile"><?= $company['mobile'] ?></span><br><?php endif; ?>

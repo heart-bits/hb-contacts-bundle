@@ -73,29 +73,37 @@
                 <source>Add the Link to the company website</source>
                 <target>Add the Link to the company website</target>
             </trans-unit>
-            <trans-unit id="tl_companies.geocoderAddress.0">
-                <source>Full address</source>
-                <target>Full address</target>
+            <trans-unit id="tl_companies.street.0">
+                <source>Street and number</source>
+                <target>Street and number</target>
             </trans-unit>
-            <trans-unit id="tl_companies.geocoderAddress.1">
-                <source>Add the address of the company (Bsp.: Street 1, 12345 City)</source>
-                <target>Add the address of the company (Bsp.: Street 1, 12345 City)</target>
+            <trans-unit id="tl_companies.street.1">
+                <source>Add the street and number</source>
+                <target>Add the street and number</target>
             </trans-unit>
-            <trans-unit id="tl_companies.geocoderCountry.0">
+            <trans-unit id="tl_companies.zip.0">
+                <source>ZIP Code</source>
+                <target>ZIP Code</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.zip.1">
+                <source>Add the zip code</source>
+                <target>Add the zip code</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.city.0">
+                <source>City</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.city.1">
+                <source>Add the city</source>
+                <target>Add the city</target>
+            </trans-unit>
+            <trans-unit id="tl_companies.country.0">
                 <source>Country</source>
                 <target>Country</target>
             </trans-unit>
-            <trans-unit id="tl_companies.geocoderCountry.1">
+            <trans-unit id="tl_companies.country.1">
                 <source>Choose the country</source>
                 <target>Choose the country</target>
-            </trans-unit>
-            <trans-unit id="tl_companies.singleCoords.0">
-                <source>Coordinates</source>
-                <target>Coordinates</target>
-            </trans-unit>
-            <trans-unit id="tl_companies.singleCoords.1">
-                <source>Coordinates of the address (Will be generated automatically)</source>
-                <target>Coordinates of the address (Will be generated automatically)</target>
             </trans-unit>
             <trans-unit id="tl_companies.phone.0">
                 <source>Phone</source>

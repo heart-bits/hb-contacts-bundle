@@ -2,7 +2,7 @@
     <file datatype="php" original="src/Resources/contao/languages/en/tl_departments.php" source-language="en" target-language="de">
         <body>
             <trans-unit id="tl_departments.department_legend">
-                <source>Departmentd</source>
+                <source>Departments</source>
                 <target>Abteilungen</target>
             </trans-unit>
             <trans-unit id="tl_departments.expert_legend">
@@ -10,7 +10,7 @@
                 <target>Experteneinstellungen</target>
             </trans-unit>
             <trans-unit id="tl_departments.new.0">
-                <source>New company</source>
+                <source>New department</source>
                 <target>Neue Abteilung</target>
             </trans-unit>
             <trans-unit id="tl_departments.new.1">

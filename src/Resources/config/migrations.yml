@@ -1,0 +1,12 @@
+services:
+    Heartbits\ContaoContacts\Migration\CompanyMigration:
+        arguments:
+            - '@database_connection'
+        tags:
+            - { name: contao.migration, priority: 0 }
+
+    Heartbits\ContaoContacts\Migration\ContactMigration:
+        arguments:
+            - '@database_connection'
+        tags:
+            - { name: contao.migration, priority: 0 }

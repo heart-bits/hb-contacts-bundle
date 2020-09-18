@@ -65,29 +65,37 @@
                 <source>Please select a file from the files directory</source>
                 <target>Please select a file from the files directory</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.geocoderAddress.0">
-                <source>Full address</source>
-                <target>Full address</target>
+            <trans-unit id="tl_contacts.street.0">
+                <source>Street and number</source>
+                <target>Street and number</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.geocoderAddress.1">
-                <source>Enter the address of the contact (Bsp.: Street 1, 12345 City)</source>
-                <target>Enter the address of the contact (Bsp.: Street 1, 12345 City)</target>
+            <trans-unit id="tl_contacts.street.1">
+                <source>Add the street and number</source>
+                <target>Add the street and number</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.geocoderCountry.0">
+            <trans-unit id="tl_contacts.zip.0">
+                <source>ZIP Code</source>
+                <target>ZIP Code</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.zip.1">
+                <source>Add the zip code</source>
+                <target>Add the zip code</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.city.0">
+                <source>City</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.city.1">
+                <source>Add the city</source>
+                <target>Add the city</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.country.0">
                 <source>Country</source>
                 <target>Country</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.geocoderCountry.1">
+            <trans-unit id="tl_contacts.country.1">
                 <source>Choose the country</source>
                 <target>Choose the country</target>
-            </trans-unit>
-            <trans-unit id="tl_contacts.singleCoords.0">
-                <source>Coordinates</source>
-                <target>Coordinates</target>
-            </trans-unit>
-            <trans-unit id="tl_contacts.singleCoords.1">
-                <source>Coordinates of the address (Will be generated automatically)</source>
-                <target>Coordinates of the address (Will be generated automatically)</target>
             </trans-unit>
             <trans-unit id="tl_contacts.lastname.0">
                 <source>Last name</source>
@@ -194,14 +202,6 @@
                 <source>Enter the link to the LinkedIn profile of the contact</source>
                 <target>Enter the link to the LinkedIn profile of the contact</target>
             </trans-unit>
-            <trans-unit id="tl_contacts.company.0">
-                <source>Company</source>
-                <target>Company</target>
-            </trans-unit>
-            <trans-unit id="tl_contacts.company.1">
-                <source>Choose a company for the contact</source>
-                <target>Choose a company for the contact</target>
-            </trans-unit>
             <trans-unit id="tl_contacts.invisible.0">
                 <source>Invisible</source>
                 <target>Invisible</target>
@@ -237,6 +237,10 @@
             <trans-unit id="tl_contacts.visitLinkedin">
                 <source>Visit %s's profile on LinkedIn</source>
                 <target>Visit %s's profile on LinkedIn</target>
+            </trans-unit>
+            <trans-unit id="tl_contacts.department_legend">
+                <source>Departments</source>
+                <target>Departments</target>
             </trans-unit>
         </body>
     </file>

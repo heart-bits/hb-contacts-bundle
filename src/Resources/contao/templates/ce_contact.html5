@@ -11,8 +11,8 @@
 
             <div class="contact-details">
                 <span class="contact-name"><strong><?= $contact['firstname'] ?> <?= $contact['lastname'] ?></strong></span><br>
-                <?php if ($contact['geocoderAddress']): ?><span class="contact-adress"><?= $contact['geocoderAddress'] ?></span><br><?php endif; ?>
-                <?php if ($contact['geocoderCountry']): ?><span class="contact-country"><?= $contact['geocoderCountry'] ?></span><br><?php endif; ?>
+                <?php if ($contact['street'] || $contact['zip'] || $contact['city']): ?><span class="contact-adress"><?= $contact['street'] ?>, <?= $contact['zip'] ?> <?= $contact['city'] ?></span><br><?php endif; ?>
+                <?php if ($contact['country']): ?><span class="contact-country"><?= $contact['country'] ?></span><br><?php endif; ?>
                 <?php if ($contact['birthday']): ?><span class="contact-birthday"><?= $contact['birthday'] ?></span><br><?php endif; ?>
                 <?php if ($contact['phone']): ?><span class="contact-phone"><?= $contact['phone'] ?></span><br><?php endif; ?>
                 <?php if ($contact['fax']): ?><span class="contact-fax"><?= $contact['fax'] ?></span><br><?php endif; ?>
@@ -20,7 +20,7 @@
                 <?php if ($contact['email']): ?><span class="contact-email"><a href="mailto:<?= $contact['email'] ?>" title="<?= sprintf($this->trans('tl_contacts.email_to'), $contact['firstname'] . ' ' . $contact['lastname']) ?>" aria-label="<?= sprintf($this->trans('tl_contacts.email_to'), $contact['firstname'] . ' ' . $contact['lastname']) ?>"><?= $contact['email'] ?></a></span><?php endif; ?>
             </div>
             <div class="company-details">
-                <?php if ($contact['company']): ?><span class="contact-company"><?php if ($contact['company_href']): ?><a href="<?= $contact['company_href'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitWebsite'), $contact['company']) ?>"><?php endif; ?><?= $contact['company'] ?><?php if ($contact['company_href']): ?></a><?php endif; ?></span><br><?php endif; ?>
+                <?php if ($contact['pid']): ?><span class="contact-company"><?php if ($contact['company_href']): ?><a href="<?= $contact['company_href'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitWebsite'), $contact['pid']) ?>"><?php endif; ?><?= $contact['pid'] ?><?php if ($contact['company_href']): ?></a><?php endif; ?></span><br><?php endif; ?>
                 <?php if ($contact['department']): ?><span class="contact-department"><?= $contact['department'] ?></span><br><?php endif; ?>
                 <?php if ($contact['position']): ?><span class="contact-position"><?= $contact['position'] ?></span><br><?php endif; ?>
             </div>

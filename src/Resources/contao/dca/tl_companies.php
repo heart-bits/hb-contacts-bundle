@@ -11,6 +11,11 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
     'config' => array
     (
         'dataContainer' => 'Table',
+        'ctable' => array
+        (
+            'tl_contacts'
+        ),
+        'switchToEdit' => true,
         'enableVersioning' => true,
         'sql' => array
         (
@@ -25,10 +30,10 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
     (
         'sorting' => array
         (
-            'mode' => 2,
+            'mode' => 1,
             'fields' => array('title'),
             'flag' => 1,
-            'panelLayout' => 'filter;search,limit'
+            'panelLayout' => 'search,limit;filter'
         ),
         'label' => array
         (
@@ -50,28 +55,39 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             'edit' => array
             (
                 'label' => &$GLOBALS['TL_LANG']['tl_companies']['edit'],
+                'href' => 'table=tl_contacts',
+                'icon' => 'bundles/heartbitscontaocontacts/user.svg',
+            ),
+            'editheader' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_companies']['editheader'],
                 'href' => 'act=edit',
-                'icon' => 'edit.gif'
+                'icon' => 'header.svg'
+            ),
+            'copy' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_companies']['copy'],
+                'href' => 'act=copy',
+                'icon' => 'copy.svg'
             ),
             'delete' => array
             (
                 'label' => &$GLOBALS['TL_LANG']['tl_companies']['delete'],
                 'href' => 'act=delete',
-                'icon' => 'delete.gif',
+                'icon' => 'delete.svg',
                 'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+            ),
+            'show' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_companies']['show'],
+                'href' => 'act=show',
+                'icon' => 'show.svg',
             ),
             'toggle' => array
             (
                 'icon' => 'visible.svg',
                 'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'button_callback' => array('tl_companies', 'toggleIcon')
-            ),
-            'show' => array
-            (
-                'label' => &$GLOBALS['TL_LANG']['tl_companies']['show'],
-                'href' => 'act=show',
-                'icon' => 'show.gif',
-                'attributes' => 'style="margin-right:3px"'
             ),
         )
     ),
@@ -80,7 +96,7 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
     'palettes' => array
     (
         '__selector__' => array('title'),
-        'default' => '{company_legend},title,href;{logo_legend},singleSRC;{address_legend},geocoderAddress,geocoderCountry;{contact_legend},phone,fax,mobile,email;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
+        'default' => '{company_legend},title,href;{logo_legend},singleSRC;{address_legend},street,zip,city,country;{contact_legend},phone,fax,mobile,email;{social_legend:hide},facebook,twitter,xing,linkedin;{expert_legend:hide},invisible;',
     ),
 
     // Fields
@@ -226,45 +242,51 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
             'sql' => "varchar(255) NOT NULL default ''"
         ),
 
-        'geocoderAddress' => array
+        'street' => array
         (
             'inputType' => 'text',
             'exclude' => true,
             'eval' => array(
                 'maxlength' => 255,
-                'tl_class' => 'w50 clr'
+                'tl_class' => 'w50'
             ),
-            'sql' => "varchar(255) NOT NULL default ''"/*,
-            'save_callback' => array(
-                array('tl_companies', 'generateCoords')
-            )*/
+            'sql' => "varchar(255) NOT NULL default ''"
         ),
 
-        'geocoderCountry' => array
+        'zip' => array
+        (
+            'inputType' => 'text',
+            'exclude' => true,
+            'eval' => array(
+                'maxlength' => 255,
+                'tl_class' => 'w50'
+            ),
+            'sql' => "CHAR(5) NOT NULL default ''"
+        ),
+
+        'city' => array
+        (
+            'inputType' => 'text',
+            'exclude' => true,
+            'eval' => array(
+                'maxlength' => 255,
+                'tl_class' => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+
+        'country' => array
         (
             'exclude' => true,
+            'filter' => true,
             'inputType' => 'select',
             'options' => $this->getCountries(),
             'eval' => array(
                 'includeBlankOption' => true,
-                'tl_class' => 'w50 clr'
+                'tl_class' => 'w50'
             ),
             'sql' => "varchar(2) NOT NULL default 'de'"
         ),
-
-        /*'singleCoords' => array
-        (
-            'exclude' => true,
-            'inputType' => 'text',
-            'eval' => array(
-                'maxlength' => 64,
-                'tl_class' => 'w50'
-            ),
-            'sql' => "varchar(64) NOT NULL default ''",
-            'save_callback' => array(
-                array('tl_companies', 'generateCoords')
-            )
-        ),*/
 
         'invisible' => array
         (
@@ -286,17 +308,6 @@ $GLOBALS['TL_DCA']['tl_companies'] = array
  */
 class tl_companies extends \Backend
 {
-
-    /**
-     * Get geo coodinates from address
-     * @param string
-     * @param object
-     * @return string
-     */
-    function generateCoords($varValue, DataContainer $dc)
-    {
-        return $varValue ? $varValue : \delahaye\GeoCode::getCoordinates($dc->activeRecord->geocoderAddress, $dc->activeRecord->geocoderCountry, 'de');
-    }
 
     /**
      * Return the "toggle visibility" button
