@@ -72,7 +72,7 @@ class ContactMigration extends AbstractMigration
                 $companies = $this->connection->fetchAll('SELECT id FROM tl_companies');
                 $company = intval($companies[0]['id']);
             }
-            $this->connection->executeUpdate('UPDATE tl_contacts SET company=:company, street=:street, zip=:zip, city=:city WHERE id=:id', array(':company' => $company, ':street' => $street, ':zip' => $zip, ':city' => $city, ':id' => $contact['id']));
+            $this->connection->executeUpdate('UPDATE tl_contacts SET pid=:company, street=:street, zip=:zip, city=:city WHERE id=:id', array(':company' => $company, ':street' => $street, ':zip' => $zip, ':city' => $city, ':id' => $contact['id']));
         }
 
         return new MigrationResult(
