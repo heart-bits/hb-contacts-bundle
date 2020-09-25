@@ -7,7 +7,7 @@ namespace Heartbits\ContaoContacts\Models;
 use Contao\Model;
 
 /**
- * Reads and writes portfolio items.
+ * Reads and writes departments.
  */
 class DepartmentModel extends Model
 {

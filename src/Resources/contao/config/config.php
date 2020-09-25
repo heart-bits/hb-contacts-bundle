@@ -22,5 +22,6 @@ $GLOBALS['TL_CTE']['company'] = array
 /**
  * Models
  */
-$GLOBALS['TL_MODELS']['tl_companies']          = 'Heartbits\ContaoContacts\Models\PortfolioModel';
-$GLOBALS['TL_MODELS']['tl_departments'] = 'Heartbits\ContaoContacts\Models\PortfolioCategoryModel';
+$GLOBALS['TL_MODELS']['tl_companies'] = 'Heartbits\ContaoContacts\Models\CompanyModel';
+$GLOBALS['TL_MODELS']['tl_contacts'] = 'Heartbits\ContaoContacts\Models\ContactModel';
+$GLOBALS['TL_MODELS']['tl_departments'] = 'Heartbits\ContaoContacts\Models\DepartmentModel';
