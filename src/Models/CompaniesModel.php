@@ -7,14 +7,14 @@ namespace Heartbits\ContaoContacts\Models;
 use Contao\Model;
 
 /**
- * Reads and writes contacts.
+ * Reads and writes companies.
  */
-class ContactModel extends Model
+class CompaniesModel extends Model
 {
     /**
      * Table name.
      *
      * @var string
      */
-    protected static $strTable = 'tl_contacts';
+    protected static $strTable = 'tl_companies';
 }

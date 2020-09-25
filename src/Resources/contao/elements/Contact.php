@@ -3,11 +3,13 @@
 namespace Heartbits\ContaoContacts;
 
 use Contao\ContentElement;
-use Contao\Database;
 use Contao\BackendTemplate;
 use Contao\System;
 use Contao\FilesModel;
 use Contao\StringUtil;
+use Heartbits\ContaoContacts\Models\CompaniesModel;
+use Heartbits\ContaoContacts\Models\ContactsModel;
+use Heartbits\ContaoContacts\Models\DepartmentsModel;
 
 class Contact extends ContentElement
 {
@@ -26,25 +28,67 @@ class Contact extends ContentElement
     {
         // Get selected Contact/s from database
         if (!$this->useSingleContact && $this->department_select && $this->company_select) {
-            $contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE department=? AND pid=? AND invisible=''")->execute($this->department_select, $this->company_select)->fetchAllAssoc();
+            $arrColumns = array
+            (
+                'tl_contacts.department=?',
+                'tl_contacts.pid=?',
+                'tl_contacts.invisible=?',
+            );
+            $arrValues = array
+            (
+                $this->department_select,
+                $this->company_select,
+                '',
+            );
+            $arrOptions = array
+            (
+                'order' => 'tl_contacts.lastname ASC',
+            );
         } elseif (!$this->useSingleContact && $this->company_select) {
-            $contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE pid=? AND invisible=''")->execute($this->company_select)->fetchAllAssoc();
+            $arrColumns = array
+            (
+                'tl_contacts.pid=?',
+                'tl_contacts.invisible=?',
+            );
+            $arrValues = array
+            (
+                $this->company_select,
+                '',
+            );
+            $arrOptions = array
+            (
+                'order' => 'tl_contacts.lastname ASC',
+            );
         } elseif($this->useSingleContact && $this->contact_select) {
-            $contactData = Database::getInstance()->prepare("SELECT * FROM tl_contacts WHERE id=? AND invisible=''")->execute($this->contact_select)->fetchAllAssoc();
+            $arrColumns = array
+            (
+                'tl_contacts.id=?',
+                'tl_contacts.invisible=?',
+            );
+            $arrValues = array
+            (
+                $this->contact_select,
+                '',
+            );
+            $arrOptions = array
+            (
+                'order' => 'tl_contacts.lastname ASC',
+            );
         }
+        $objContact = ContactsModel::findBy($arrColumns, $arrValues, $arrOptions);
 
         // Push selected Contact/s to template
         if (TL_MODE == 'BE') {
             $this->Template = new BackendTemplate('be_wildcard');
             $title = '';
-            if (!empty($contactData)) {
-                $contactCount = count($contactData);
+            if (null !== $objContact) {
+                $contactCount = $objContact->count();
                 $i = 1;
-                foreach ($contactData as $contact) {
+                while ($objContact->next()) {
                     if ($contactCount === $i) {
-                        $title .= $contact['firstname'] . ' ' . $contact['lastname'] . '<br>';
+                        $title .= $objContact->firstname . ' ' . $objContact->lastname . '<br>';
                     } else {
-                        $title .= $contact['firstname'] . ' ' . $contact['lastname'] . ',<br>';
+                        $title .= $objContact->firstname . ' ' . $objContact->lastname . ',<br>';
                     }
                     $i++;
                 }
@@ -55,17 +99,17 @@ class Contact extends ContentElement
             $rootDir = $container->getParameter('kernel.project_dir');
             System::loadLanguageFile('tl_contacts');
             $arrContacts = [];
-            if (!empty($contactData)) {
+            if (null !== $objContact) {
                 $i = 0;
-                foreach ($contactData as $contact) {
-                    foreach ($contact as $key => $value) {
+                while ($objContact->next()) {
+                    foreach ($objContact->row() as $key => $value) {
                         if ($key === 'department') {
-                            $department = Database::getInstance()->prepare("SELECT title FROM tl_departments WHERE id=? AND invisible=''")->execute($value);
-                            $arrContacts[$i][$key] = $department->title;
+                            $objDepartment = DepartmentsModel::findById($value);
+                            $arrContacts[$i][$key] = $objDepartment->title;
                         } elseif ($key === 'pid') {
-                            $company = Database::getInstance()->prepare("SELECT title, href FROM tl_companies WHERE id=? AND invisible=''")->execute($value);
-                            $arrContacts[$i][$key] = $company->title;
-                            $arrContacts[$i]['company_href'] = $company->href;
+                            $objCompany = CompaniesModel::findById($value);
+                            $arrContacts[$i][$key] = $objCompany->title;
+                            $arrContacts[$i]['company_href'] = $objCompany->href;
                         } elseif ($key === 'country') {
                             System::loadLanguageFile('countries');
                             $arrContacts[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];
@@ -92,7 +136,6 @@ class Contact extends ContentElement
                     }
                     $i++;
                 }
-                $this->Template->size = StringUtil::deserialize($this->size)[2];
                 $this->Template->contacts = $arrContacts;
             }
         }

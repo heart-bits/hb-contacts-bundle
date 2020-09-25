@@ -3,11 +3,11 @@
 namespace Heartbits\ContaoContacts;
 
 use Contao\ContentElement;
-use Contao\Database;
 use Contao\BackendTemplate;
 use Contao\System;
 use Contao\FilesModel;
 use Contao\StringUtil;
+use Heartbits\ContaoContacts\Models\CompaniesModel;
 
 class Company extends ContentElement
 {
@@ -26,23 +26,51 @@ class Company extends ContentElement
     {
         // Get selected Company/ies from template
         if ($this->useSingleCompany && $this->company_select) {
-            $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE id=? AND invisible=''")->limit(1)->execute($this->company_select)->fetchAllAssoc();
+            $arrColumns = array
+            (
+                'tl_companies.id=?',
+                'tl_companies.invisible=?',
+            );
+            $arrValues = array
+            (
+                $this->company_select,
+                '',
+            );
+            $arrOptions = array
+            (
+                'order' => 'tl_companies.title ASC',
+                'limit' => 1
+            );
         } else {
-            $companyData = Database::getInstance()->prepare("SELECT * FROM tl_companies WHERE country=? AND invisible=''")->execute($this->country_select)->fetchAllAssoc();
+            $arrColumns = array
+            (
+                'tl_companies.country=?',
+                'tl_companies.invisible=?',
+            );
+            $arrValues = array
+            (
+                $this->country_select,
+                '',
+            );
+            $arrOptions = array
+            (
+                'order' => 'tl_companies.title ASC',
+            );
         }
+        $objCompany = CompaniesModel::findBy($arrColumns, $arrValues, $arrOptions);
 
         // Push selected Company/ies to template
         if (TL_MODE == 'BE') {
             $this->Template = new BackendTemplate('be_wildcard');
             $title = '';
-            if (!empty($companyData)) {
-                $companyCount = count($companyData);
+            if (null !== $objCompany) {
+                $companyCount = $objCompany->count();
                 $i = 1;
-                foreach ($companyData as $company) {
+                while ($objCompany->next()) {
                     if ($companyCount === $i) {
-                        $title .= $company['title'] . ' (' . $company['street'] . ', ' . $company['zip'] . $company['city'] . ')';
+                        $title .= '[' . $i . '] ' . $objCompany->title . ' (' . $objCompany->street . ', ' . $objCompany->zip . ' ' . $objCompany->city . ')';
                     } else {
-                        $title .= $company['title'] . ' (' . $company['street'] . ', ' . $company['zip'] . $company['city'] . '),<br>';
+                        $title .= '[' . $i . '] ' . $objCompany->title . ' (' . $objCompany->street . ', ' . $objCompany->zip . ' ' . $objCompany->city . '),<br>';
                     }
                     $i++;
                 }
@@ -53,10 +81,10 @@ class Company extends ContentElement
             $rootDir = $container->getParameter('kernel.project_dir');
             System::loadLanguageFile('tl_companies');
             $arrCompanies = [];
-            if (!empty($companyData)) {
+            if (null !== $objCompany) {
                 $i = 0;
-                foreach ($companyData as $company) {
-                    foreach ($company as $key => $value) {
+                while ($objCompany->next()) {
+                    foreach ($objCompany->row() as $key => $value) {
                         if ($key === 'country') {
                             System::loadLanguageFile('countries');
                             $arrCompanies[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];
