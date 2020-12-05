@@ -22,6 +22,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['department_select'] = array
     'options_callback' => array('Heartbits\ContaoContacts\Callbacks', 'getDepartments'),
     'inputType' => 'select',
     'eval' => array(
+        'submitOnChange'=>true,
         'includeBlankOption' => true,
         'tl_class' => 'w50'
     ),
