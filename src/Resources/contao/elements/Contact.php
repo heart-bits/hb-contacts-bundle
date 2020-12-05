@@ -27,7 +27,22 @@ class Contact extends ContentElement
     protected function compile()
     {
         // Get selected Contact/s from database
-        if (!$this->useSingleContact && $this->department_select && $this->company_select) {
+        if ($this->useSingleContact) {
+            $arrColumns = array
+            (
+                'tl_contacts.id=?',
+                'tl_contacts.invisible=?',
+            );
+            $arrValues = array
+            (
+                $this->contact_select,
+                '',
+            );
+            $arrOptions = array
+            (
+                'order' => 'tl_contacts.lastname ASC',
+            );
+        } elseif ($this->department_select && $this->company_select) {
             $arrColumns = array
             (
                 'tl_contacts.department=?',
@@ -44,7 +59,7 @@ class Contact extends ContentElement
             (
                 'order' => 'tl_contacts.lastname ASC',
             );
-        } elseif (!$this->useSingleContact && $this->company_select) {
+        } else {
             $arrColumns = array
             (
                 'tl_contacts.pid=?',
@@ -53,21 +68,6 @@ class Contact extends ContentElement
             $arrValues = array
             (
                 $this->company_select,
-                '',
-            );
-            $arrOptions = array
-            (
-                'order' => 'tl_contacts.lastname ASC',
-            );
-        } elseif($this->useSingleContact && $this->contact_select) {
-            $arrColumns = array
-            (
-                'tl_contacts.id=?',
-                'tl_contacts.invisible=?',
-            );
-            $arrValues = array
-            (
-                $this->contact_select,
                 '',
             );
             $arrOptions = array
