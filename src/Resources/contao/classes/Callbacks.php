@@ -31,7 +31,11 @@ class Callbacks extends \Backend
      */
     public function getContacts(DataContainer $dc)
     {
-        $contacts = Database::getInstance()->prepare("SELECT id, lastname, firstname FROM tl_contacts WHERE pid=? AND invisible='' ORDER BY lastname ASC")->execute($dc->activeRecord->company_select)->fetchAllAssoc();
+        if ($dc->activeRecord->department_select) {
+            $contacts = Database::getInstance()->prepare("SELECT id, lastname, firstname FROM tl_contacts WHERE pid=? AND department=? AND invisible='' ORDER BY lastname ASC")->execute($dc->activeRecord->company_select, $dc->activeRecord->department_select)->fetchAllAssoc();
+        } else {
+            $contacts = Database::getInstance()->prepare("SELECT id, lastname, firstname FROM tl_contacts WHERE pid=? AND invisible='' ORDER BY lastname ASC")->execute($dc->activeRecord->company_select)->fetchAllAssoc();
+        }
         $options = array();
         if (!empty($contacts) && is_array($contacts)) {
             foreach ($contacts as $contact) {
