@@ -95,7 +95,7 @@ class Company extends ContentElement
                                 if ($objFile !== null || is_file(System::getContainer()->getParameter('kernel.project_dir') . '/' . $path)) {
                                     $picture = $container
                                         ->get('contao.image.picture_factory')
-                                        ->create($rootDir . '/' . $path, StringUtil::deserialize($this->size)[2]);
+                                        ->create($rootDir . '/' . $path, StringUtil::deserialize($this->size));
                                     $data = [
                                         'picture' => [
                                             'img' => $picture->getImg($rootDir),
