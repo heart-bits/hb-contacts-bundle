@@ -50,7 +50,7 @@ class Callbacks extends \Backend
      *
      * @return array
      */
-    public function getDepartments()
+    public function getDepartments(DataContainer $dc)
     {
         $departments = Database::getInstance()->prepare("SELECT id, title FROM tl_departments WHERE invisible='' ORDER BY title ASC")->execute($dc->activeRecord->company_select)->fetchAllAssoc();
         $options = array();
