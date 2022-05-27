@@ -105,11 +105,15 @@ class Contact extends ContentElement
                     foreach ($objContact->row() as $key => $value) {
                         if ($key === 'department') {
                             $objDepartment = DepartmentsModel::findById($value);
-                            $arrContacts[$i][$key] = $objDepartment->title;
+                            if ($objDepartment !== null) {
+                                $arrContacts[$i][$key] = $objDepartment->title;
+                            }
                         } elseif ($key === 'pid') {
                             $objCompany = CompaniesModel::findById($value);
-                            $arrContacts[$i][$key] = $objCompany->title;
-                            $arrContacts[$i]['company_href'] = $objCompany->href;
+                            if ($objCompany !== null) {
+                                $arrContacts[$i][$key] = $objCompany->title;
+                                $arrContacts[$i]['company_href'] = $objCompany->href;
+                            }
                         } elseif ($key === 'country') {
                             System::loadLanguageFile('countries');
                             $arrContacts[$i][$key] = $GLOBALS['TL_LANG']['CNT'][$value];

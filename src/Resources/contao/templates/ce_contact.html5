@@ -21,7 +21,7 @@
             </div>
             <div class="company-details">
                 <?php if ($contact['pid']): ?><span class="contact-company"><?php if ($contact['company_href']): ?><a href="<?= $contact['company_href'] ?>" title="<?= sprintf($this->trans('tl_contacts.visitWebsite'), $contact['pid']) ?>"><?php endif; ?><?= $contact['pid'] ?><?php if ($contact['company_href']): ?></a><?php endif; ?></span><br><?php endif; ?>
-                <?php if ($contact['department']): ?><span class="contact-department"><?= $contact['department'] ?></span><br><?php endif; ?>
+                <?php if (array_key_exists('department', $contact)): ?><span class="contact-department"><?= $contact['department'] ?></span><br><?php endif; ?>
                 <?php if ($contact['position']): ?><span class="contact-position"><?= $contact['position'] ?></span><br><?php endif; ?>
             </div>
             <div class="contact-social">
